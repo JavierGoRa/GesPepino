@@ -29,10 +29,10 @@ class CreateFacturasTable extends Migration
             $table->date('fecha_vencimiento')->nullable();
             $table->text('concepto')->nullable();
             $table->string('sucursal')->nullable();
-            $table->integer('iban')->nullable();
+            $table->text('iban')->nullable();
             $table->string('bic_switch')->nullable();
-            $table->integer('iva')->nullable();
-            $table->integer('importe')->nullable();
+            $table->float('iva')->nullable();
+            $table->float('importe')->nullable();
             });
     }
 

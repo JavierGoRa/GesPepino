@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('facturas');
 });
 
 Route::resource('facturas', 'FacturasController');
+Route::resource('trabajos', 'TrabajosController');
+
+
+Route::get('facturas/ajax/get/trabajos', 'FacturasController@getTrabajos')->name('facturas.getTrabajos');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Trabajo;
 use App\Factura;
 use Illuminate\Http\Request;
 
@@ -69,8 +70,23 @@ class FacturasController extends Controller
         
         $requestData = $request->all();
         
-        Factura::create($requestData);
+        $factura = Factura::create($requestData);
 
+        $trabajoData = array();
+        $trabajoData['iva'] = $factura->iva;
+        $trabajoData['id_factura'] = $factura->id;
+
+        for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
+            $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
+            $trabajoData['cantidad'] = $requestData['cantidades'][$i];
+            $trabajoData['precio_u'] = $requestData['precios'][$i];
+            $trabajoData['descuento'] = $requestData['descuentos'][$i];
+            $trabajoData['importe'] = $requestData['importes'][$i];
+
+            Trabajo::create($trabajoData);
+        }
+        
+        
         return redirect('facturas')->with('flash_message', 'Factura added!');
     }
 
@@ -118,6 +134,22 @@ class FacturasController extends Controller
         $factura = Factura::findOrFail($id);
         $factura->update($requestData);
 
+        Trabajo::where('id_factura', $factura->id)->delete();
+
+        $trabajoData = array();
+        $trabajoData['iva'] = $factura->iva;
+        $trabajoData['id_factura'] = $factura->id;
+
+        for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
+            $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
+            $trabajoData['cantidad'] = $requestData['cantidades'][$i];
+            $trabajoData['precio_u'] = $requestData['precios'][$i];
+            $trabajoData['descuento'] = $requestData['descuentos'][$i];
+            $trabajoData['importe'] = $requestData['importes'][$i];
+
+            Trabajo::create($trabajoData);
+        }
+
         return redirect('facturas')->with('flash_message', 'Factura updated!');
     }
 
@@ -133,5 +165,25 @@ class FacturasController extends Controller
         Factura::destroy($id);
 
         return redirect('facturas')->with('flash_message', 'Factura deleted!');
+    }
+
+    public function getTrabajos(Request $request){
+        
+        $jsondata = array();
+
+        $a = 0;
+        foreach (Trabajo::where('id_factura', $request->id)->get() as $value) {
+
+            $jsondata['descripciones'][$a] = $value->descripcion;
+            $jsondata['cantidades'][$a] = $value->cantidad;
+            $jsondata['precios'][$a] = $value->precio;
+            $jsondata['descuentos'][$a] = $value->descuento;
+            $jsondata['importes'][$a] = $value->importe;
+            $a++;
+
+        }
+
+        echo json_encode($jsondata);
+
     }
 }

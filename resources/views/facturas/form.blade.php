@@ -59,10 +59,9 @@
     <thead>
         <th>Descripción</th>
         <th>Cantidad</th>
-        <th>Precio/u</th>
-        <th>Descuento</th>
-        <th>Iva</th>
-        <th>Importe</th>
+        <th>Precio/u €</th>
+        <th>Descuento %</th>
+        <th>Importe €</th>
         <th></th>
     </thead>
     <tbody id="tbodyTrabajos">
@@ -80,13 +79,11 @@
                 <input class="form-control" id="descuento_trabajo" type="number" placeholder="Descuento" step="any">
             </td>
             <td>
-                <input class="form-control" id="iva_trabajo" type="number" placeholder="IVA" step="any">
-            </td>
-            <td>
                 <input class="form-control" id="importe_trabajo" type="number" disabled placeholder="Importe" step="any">
             </td>
             <td>
-                <button id="btn_anadir_trabajo" class="btn-primary" type="button">+</button>
+                <button style="width:30px;margin-bottom:2px" id="calcular" class="btn-success" type="button"><i class="fa fa-euro"></i></button>
+                <button style="width:30px" id="btn_anadir_trabajo" class="btn-primary" type="button"><i class="fa fa-arrow-down"></i></button>
             </td>
         </tr>
     </tbody>
@@ -105,23 +102,27 @@
 </div>
 <div class="form-group {{ $errors->has('sucursal') ? 'has-error' : ''}}">
     <label for="sucursal" class="control-label">{{ 'Sucursal' }}</label>
-    <input class="form-control col-md-4" name="sucursal" type="text" id="sucursal" value="{{ isset($factura->sucursal) ? $factura->sucursal : ''}}" >
+    <input class="form-control col-md-3" name="sucursal" type="text" id="sucursal" value="{{ isset($factura->sucursal) ? $factura->sucursal : ''}}" >
     {!! $errors->first('sucursal', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('iban') ? 'has-error' : ''}}">
     <label for="iban" class="control-label">{{ 'Iban' }}</label>
-    <input class="form-control" name="iban" type="number" id="iban" value="{{ isset($factura->iban) ? $factura->iban : ''}}" >
+    <input class="form-control col-md-4" name="iban" type="number" id="iban" value="{{ isset($factura->iban) ? $factura->iban : ''}}" >
     {!! $errors->first('iban', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('bic_switch') ? 'has-error' : ''}}">
     <label for="bic_switch" class="control-label">{{ 'Bic Switch' }}</label>
-    <input class="form-control" name="bic_switch" type="text" id="bic_switch" value="{{ isset($factura->bic_switch) ? $factura->bic_switch : ''}}" >
+    <input class="form-control col-md-4" name="bic_switch" type="text" id="bic_switch" value="{{ isset($factura->bic_switch) ? $factura->bic_switch : ''}}" >
     {!! $errors->first('bic_switch', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('iva') ? 'has-error' : ''}}">
     <label for="iva" class="control-label">{{ 'Iva' }}</label>
     <input class="form-control col-md-2" name="iva" type="number" id="iva" value="{{ isset($factura->iva) ? $factura->iva : ''}}" step="any">
     {!! $errors->first('iva', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group">
+
+<button type="button" id="calcular_factura" class="btn btn-success"><i class="fa fa-euro"> Calcular factura</i></button>
 </div>
 <div class="form-group {{ $errors->has('importe') ? 'has-error' : ''}}">
     <label for="importe" class="control-label">{{ 'Importe' }}</label>
