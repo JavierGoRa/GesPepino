@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\FacturaMail;
 
 use App\Trabajo;
 use App\Factura;
 use Illuminate\Http\Request;
+
+use PDF;
 
 class FacturasController extends Controller
 {
@@ -184,6 +189,29 @@ class FacturasController extends Controller
         }
 
         echo json_encode($jsondata);
+
+    }
+
+    public function generarPDF($id){
+
+        $factura = Factura::find($id);
+
+        $trabajos = array();
+
+        $a = 0;
+        foreach (Trabajo::where('id_factura', $id)->get() as $value) {
+
+            $trabajos['descripciones'][$a] = $value->descripcion;
+            $trabajos['cantidades'][$a] = $value->cantidad;
+            $trabajos['precios'][$a] = $value->precio;
+            $trabajos['descuentos'][$a] = $value->descuento;
+            $trabajos['importes'][$a] = $value->importe;
+            $a++;
+
+        }
+
+        $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4', 'landscape');
+        return $pdf->download('factura.pdf');
 
     }
 }

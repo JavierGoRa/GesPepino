@@ -100,7 +100,6 @@
         $('#calcular_factura').click(function(){
             var importe = 0;
 
-
             if ($('#iva').val() != '') {
                 if ($('.importes').length != 0) {
 

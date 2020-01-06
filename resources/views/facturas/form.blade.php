@@ -38,6 +38,11 @@
     <input value="" class="form-control col-md-4" name="fecha" type="date" id="fecha" value="{{ isset($factura->fecha) ? $factura->fecha : ''}}" >
     {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('nombre_cliente') ? 'has-error' : ''}}">
+    <label for="nombre_cliente" class="control-label">{{ 'Nombre Cliente' }}</label>
+    <input class="form-control" rows="5" name="nombre_cliente" value="{{ isset($factura->nombre_cliente) ? $factura->nombre_cliente : ''}}" type="text" id="direccion_cliente" >
+    {!! $errors->first('nombre_cliente', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('direccion_cliente') ? 'has-error' : ''}}">
     <label for="direccion_cliente" class="control-label">{{ 'Direccion Cliente' }}</label>
     <input class="form-control" rows="5" name="direccion_cliente" value="{{ isset($factura->direccion_cliente) ? $factura->direccion_cliente : ''}}" type="text" id="direccion_cliente" >
