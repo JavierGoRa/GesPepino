@@ -55,9 +55,19 @@
 
                 for (let index = 0; index < data['descripciones'].length; index++) {
 
+                    if (data['descripciones'][index] !== null) {
+                       
+                        descripcion = '<td>' + data['descripciones'][index] + ' <input type="hidden" name="descrpciones[]" value="' + data['descripciones'][index] + '"></td>';
+
+                    } else {
+                       
+                        descripcion = '<td><input type="hidden" name="descrpciones[]"></td>';
+
+                    }
+
                     $('#tbodyTrabajos').append(
                         '<tr id="trabajo' + tr + '">' +
-                            '<td>' + data['descripciones'][index] + ' <input type="hidden" name="descrpciones[]" value="' + data['descripciones'][index] + '"></td>' +
+                            descripcion +
                             '<td>' + data['cantidades'][index] + ' <input type="hidden" name="cantidades[]" value="' + data['cantidades'][index] + '"></td>' +
                             '<td>' + data['precios'][index] + ' <input type="hidden" name="precios[]" value="' + data['precios'][index] + '"></td>' +
                             '<td>' + data['descuentos'][index] + ' <input type="hidden" name="descuentos[]" value="' + data['descuentos'][index] + '">'  + '</td>' +
@@ -118,7 +128,7 @@
                     precio = precio - descuento;
                 }
 
-                $('#importe_trabajo').val(precio);      
+                $('#importe_trabajo').val(precio.toFixed(2));      
 
             } else {
                 alert("Introduce un IVA y precio unitario");
@@ -130,7 +140,6 @@
         $('#calcular_factura').click(function(){
         var importe = 0;
 
-
             if ($('#iva').val() != '') {
                 if ($('.importes').length != 0) {
 
@@ -140,7 +149,7 @@
 
                     var iva = importe / 100 * parseFloat($('#iva').val());
                     importe = iva + importe;
-                    $('#importe').val(importe);
+                    $('#importe').val(importe.toFixed(2));
 
                 } else {
                     alert("Introduce algun trabajo");

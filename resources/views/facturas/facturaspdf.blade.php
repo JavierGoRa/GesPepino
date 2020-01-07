@@ -7,7 +7,7 @@
 
         <table class="table">
         
-            <thead>
+            <tr>
 
                 <th>Descripcion</th>
                 <th>Cantidad</th>
@@ -15,29 +15,25 @@
                 <th>Descuento %</th>
                 <th>Importe €</th>
 
-            </thead>
-
-            <tbody>
+            </tr>
 
                 <?php
-                
-                for ($i=0; $i < count($trabajos['descripciones']); $i++) { 
-                    echo "<tr>";
                     
-                        echo "<td>" . $trabajos['descripciones'][$i] . "</td>";
-                        echo "<td>" . $trabajos['cantidades'][$i]. "</td>";
-                        echo "<td>" . $trabajos['precios'][$i]. "</td>";
-                        echo "<td>" . $trabajos['descuentos'][$i]. "</td>";
-                        echo "<td>" . $trabajos['importes'][$i]. "</td>";
-                
-                    echo "</tr>";
-                }
+                    for ($i=0; $i < count($trabajos['descripciones']); $i++) { 
+                        echo "<tr>";
+                        
+                            echo "<td>" . $trabajos['descripciones'][$i] . "</td>";
+                            echo "<td>" . $trabajos['cantidades'][$i]. "</td>";
+                            echo "<td>" . $trabajos['precios'][$i]. "</td>";
+                            echo "<td>" . $trabajos['descuentos'][$i]. "</td>";
+                            echo "<td>" . $trabajos['importes'][$i]. "</td>";
+                    
+                        echo "</tr>";
+                    }
 
                 ?>
 
             
-            </tbody>
-
         </table>
         
     </body>

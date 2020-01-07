@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
-use App\Mail\FacturaMail;
+use App\Mail\facturaMail;
 
 use App\Trabajo;
 use App\Factura;
@@ -181,7 +181,7 @@ class FacturasController extends Controller
 
             $jsondata['descripciones'][$a] = $value->descripcion;
             $jsondata['cantidades'][$a] = $value->cantidad;
-            $jsondata['precios'][$a] = $value->precio;
+            $jsondata['precios'][$a] = $value->precio_u;
             $jsondata['descuentos'][$a] = $value->descuento;
             $jsondata['importes'][$a] = $value->importe;
             $a++;
@@ -203,7 +203,7 @@ class FacturasController extends Controller
 
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
-            $trabajos['precios'][$a] = $value->precio;
+            $trabajos['precios'][$a] = $value->precio_u;
             $trabajos['descuentos'][$a] = $value->descuento;
             $trabajos['importes'][$a] = $value->importe;
             $a++;
@@ -212,6 +212,17 @@ class FacturasController extends Controller
 
         $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4', 'landscape');
         return $pdf->download('factura.pdf');
+
+    }
+
+    public function enviarFactura(Request $request, $id){
+
+        $factura = Factura::find($id);
+
+        Mail::to("javigora97@gmail.com", "Javier")
+        ->send(new facturaMail($factura));
+
+        return true;
 
     }
 }

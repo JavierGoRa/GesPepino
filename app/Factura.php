@@ -25,7 +25,7 @@ class Factura extends Model
      *
      * @var array
      */
-    protected $fillable = ['direccion', 'nombre_cliente', 'ciudad', 'codigo_postal', 'dni', 'telefono_personal', 'telefono_oficina', 'email', 'fecha', 'direccion_cliente', 'codigo_postal_cliente', 'dni_cliente', 'fecha_vencimiento', 'concepto', 'sucursal', 'iban', 'bic_switch', 'iva', 'importe'];
+    protected $fillable = ['direccion', 'nombre_cliente', 'email_cliente', 'ciudad', 'codigo_postal', 'dni', 'telefono_personal', 'telefono_oficina', 'email', 'fecha', 'direccion_cliente', 'codigo_postal_cliente', 'dni_cliente', 'fecha_vencimiento', 'concepto', 'sucursal', 'iban', 'bic_switch', 'iva', 'importe'];
 
     
 }

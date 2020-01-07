@@ -21,3 +21,6 @@ Route::resource('trabajos', 'TrabajosController');
 
 Route::get('facturas/ajax/get/trabajos', 'FacturasController@getTrabajos')->name('facturas.getTrabajos');
 Route::get('facturas/pdf/{id}', 'FacturasController@generarPDF');
+Route::get('facturas/email/{id}', 'FacturasController@enviarFactura');
+
+

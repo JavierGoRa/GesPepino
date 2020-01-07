@@ -88,10 +88,12 @@
                     precio = precio - descuento;
                 }
 
-                $('#importe_trabajo').val(precio);      
+                $('#importe_trabajo').val(precio.toFixed(2));      
 
             } else {
+
                 alert("Introduce un IVA y precio unitario");
+            
             }      
         
         });
@@ -109,7 +111,7 @@
         
                     var iva = importe / 100 * parseFloat($('#iva').val());
                     importe = iva + importe;
-                    $('#importe').val(importe);
+                    $('#importe').val(importe.toFixed(2));
         
                 } else {
                     alert("Introduce algun trabajo");

@@ -22,6 +22,7 @@ class CreateFacturasTable extends Migration
             $table->string('telefono_personal')->nullable();
             $table->string('telefono_oficina')->nullable();
             $table->text('email')->nullable();
+            $table->text('email_cliente')->nullable();
             $table->date('fecha')->nullable();
             $table->string('nombre_cliente')->nullable();
             $table->text('direccion_cliente')->nullable();
