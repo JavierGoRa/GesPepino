@@ -210,7 +210,17 @@ class FacturasController extends Controller
 
         }
 
-        $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
+
+        /* $pdf = PDF::loadHTML(
+        
+            
+
+            '<table></table>'
+        
+        ); */
+
+
         return $pdf->download('factura.pdf');
 
     }
@@ -218,6 +228,12 @@ class FacturasController extends Controller
     public function enviarFactura(Request $request, $id){
 
         $factura = Factura::find($id);
+/* 
+        Mail::send('mail', $factura, function($message){
+            $message->to("javigora97@gmail.com", "Javier")
+                    ->subject('asfasfasf');
+            $message->from('fontaneriajuancarlosinfo@gmail.com', 'adjfbs');
+        }); */
 
         Mail::to("javigora97@gmail.com", "Javier")
         ->send(new facturaMail($factura));
