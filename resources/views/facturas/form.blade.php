@@ -30,7 +30,7 @@
             <div class="form-group {{ $errors->has('dni') ? 'has-error' : ''}}">
                 <label for="dni" class="control-label">{{ 'Dni' }}</label>
                 <input disabled value="78969194-M" class="form-control" name="dni" type="text" id="codigo_postal" value="{{ isset($factura->dni) ? $factura->dni : ''}}" >
-                <input value="78969194-M" class="form-control" name="dni" type="hidden" id="codigo_postal" value="{{ isset($factura->dni) ? $factura->dni : ''}}" >
+                <input value="78969194M" class="form-control" name="dni" type="hidden" id="codigo_postal" value="{{ isset($factura->dni) ? $factura->dni : ''}}" >
                 {!! $errors->first('dni', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
@@ -50,13 +50,6 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2">
-            <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
-                <label for="email" class="control-label">{{ 'Email' }}</label>
-                <input value="{{ isset($factura->email) ? $factura->email : ''}}" class="form-control" rows="5" name="email" type="text" id="email" >
-                {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
-            </div>
-        </td>
         <td>
             <div class="form-group {{ $errors->has('fecha') ? 'has-error' : ''}}">
                 <label for="fecha" class="control-label">{{ 'Fecha' }}</label>
@@ -69,11 +62,25 @@
 
 <table width="100%">
     <tr>
-        <td colspan="4">
+        <td>
             <div class="form-group {{ $errors->has('direccion_cliente') ? 'has-error' : ''}}">
                 <label for="direccion_cliente" class="control-label">{{ 'Direccion Cliente' }}</label>
                 <input class="form-control" rows="5" name="direccion_cliente" value="{{ isset($factura->direccion_cliente) ? $factura->direccion_cliente : ''}}" type="text" id="direccion_cliente" >
                 {!! $errors->first('direccion_cliente', '<p class="help-block">:message</p>') !!}
+            </div>
+        </td>
+        <td>
+            <div class="form-group {{ $errors->has('codigo_postal_cliente') ? 'has-error' : ''}}">
+                <label for="codigo_postal_cliente" class="control-label">{{ 'Codigo Postal Cliente' }}</label>
+                <input class="form-control" name="codigo_postal_cliente" type="number" id="codigo_postal_cliente" value="{{ isset($factura->codigo_postal_cliente) ? $factura->codigo_postal_cliente : ''}}" >
+                {!! $errors->first('codigo_postal_cliente', '<p class="help-block">:message</p>') !!}
+            </div>
+        </td>
+        <td>
+            <div class="form-group {{ $errors->has('ciudad_cliente') ? 'has-error' : ''}}">
+                <label for="ciudad_cliente" class="control-label">{{ 'Ciudad Cliente' }}</label>
+                <input class="form-control" name="ciudad_cliente" type="text" id="ciudad_cliente" value="{{ isset($factura->ciudad_cliente) ? $factura->ciudad_cliente : ''}}" >
+                {!! $errors->first('ciudad_cliente', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
     </tr>
@@ -85,7 +92,7 @@
                 {!! $errors->first('nombre_cliente', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
-        <td colspan="2">
+        <td colspan="1">
             <div class="form-group {{ $errors->has('email_cliente') ? 'has-error' : ''}}">
                 <label for="email_cliente" class="control-label">{{ 'Email Cliente' }}</label>
                 <input class="form-control" rows="5" name="email_cliente" value="{{ isset($factura->email_cliente) ? $factura->email_cliente : ''}}" type="text" id="direccion_cliente" >
@@ -95,13 +102,6 @@
     </tr>
     <tr>
         <td>
-            <div class="form-group {{ $errors->has('codigo_postal_cliente') ? 'has-error' : ''}}">
-                <label for="codigo_postal_cliente" class="control-label">{{ 'Codigo Postal Cliente' }}</label>
-                <input class="form-control" name="codigo_postal_cliente" type="number" id="codigo_postal_cliente" value="{{ isset($factura->codigo_postal_cliente) ? $factura->codigo_postal_cliente : ''}}" >
-                {!! $errors->first('codigo_postal_cliente', '<p class="help-block">:message</p>') !!}
-            </div>
-        </td>
-        <td>
             <div class="form-group {{ $errors->has('dni_cliente') ? 'has-error' : ''}}">
                 <label for="dni_cliente" class="control-label">{{ 'Dni Cliente' }}</label>
                 <input class="form-control" rows="5" name="dni_cliente" type="textarea" value="{{ isset($factura->dni_cliente) ? $factura->dni_cliente : ''}}" id="dni_cliente" >
@@ -110,7 +110,7 @@
         </td>
     </tr>
 </table>
-<table class="table">
+<table class="table" width="100%">
 
     <thead>
         <th>Descripción</th>
@@ -168,7 +168,7 @@
         <td>
             <div class="form-group {{ $errors->has('iban') ? 'has-error' : ''}}">
                 <label for="iban" class="control-label">{{ 'Iban' }}</label>
-                <input class="form-control" name="iban" type="number" id="iban" value="{{ isset($factura->iban) ? $factura->iban : 'ES24 0081 0600 740001834593'}}" >
+                <input class="form-control" name="iban" type="text" id="iban" value="{{ isset($factura->iban) ? $factura->iban : 'ES24 0081 0600 740001834593'}}" >
                 {!! $errors->first('iban', '<p class="help-block">:message</p>') !!}
             </div>
         </td>

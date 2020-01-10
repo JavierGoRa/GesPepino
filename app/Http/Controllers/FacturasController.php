@@ -212,15 +212,6 @@ class FacturasController extends Controller
 
         $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
 
-        /* $pdf = PDF::loadHTML(
-        
-            
-
-            '<table></table>'
-        
-        ); */
-
-
         return $pdf->download('factura.pdf');
 
     }
@@ -228,15 +219,29 @@ class FacturasController extends Controller
     public function enviarFactura(Request $request, $id){
 
         $factura = Factura::find($id);
-/* 
-        Mail::send('mail', $factura, function($message){
-            $message->to("javigora97@gmail.com", "Javier")
-                    ->subject('asfasfasf');
-            $message->from('fontaneriajuancarlosinfo@gmail.com', 'adjfbs');
-        }); */
 
-        Mail::to("javigora97@gmail.com", "Javier")
-        ->send(new facturaMail($factura));
+        $trabajos = array();
+
+        $a = 0;
+        foreach (Trabajo::where('id_factura', $id)->get() as $value) {
+
+            $trabajos['descripciones'][$a] = $value->descripcion;
+            $trabajos['cantidades'][$a] = $value->cantidad;
+            $trabajos['precios'][$a] = $value->precio_u;
+            $trabajos['descuentos'][$a] = $value->descuento;
+            $trabajos['importes'][$a] = $value->importe;
+            $a++;
+
+        }
+
+        $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
+
+        $pdfPath = 'factura' . $factura->id . '.pdf';
+        $pdf->save(storage_path('../public/'.$pdfPath));
+
+
+        Mail::to($factura->email_cliente, "Javier")
+        ->send(new facturaMail($pdfPath));
 
         return true;
 

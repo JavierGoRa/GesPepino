@@ -10,15 +10,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class facturaMail extends Mailable
 {
     use Queueable, SerializesModels;
+    private $pdfPath;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pdfPath)
     {
-        //
+        $this->pdfPath = $pdfPath;
     }
 
     /**
@@ -28,6 +29,9 @@ class facturaMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail');
+        $this->view('mail')
+            ->attach( asset($this->pdfPath));
+
+        return back();
     }
 }

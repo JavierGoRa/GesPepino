@@ -43,8 +43,8 @@
                                 <td>{{ $item->dni_cliente }}</td>
                                 <td>{{ $item->codigo_postal_cliente }}</td>
                                 <td>
-                                    <a href="{{ url('/facturas/pdf/' . $item->id) }}" title="Generar PDF"><button class="btn btn-info btn-sm"><i class="fa fa-pdf" aria-hidden="true"></i> PDF</button></a>
-                                    <a href="{{ url('/facturas/email/' . $item->id) }}" title="Enviar Email"><button class="btn btn-info btn-sm"><i class="fa fa-mail" aria-hidden="true"></i></button></a>
+                                    <a href="{{ url('/facturas/pdf/' . $item->id) }}" title="Generar PDF"><button class="btn btn-info btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> </button></a>
+                                    <a href="{{ url('/facturas/email/' . $item->id) }}" title="Enviar Email"><button class="btn btn-info btn-sm"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></a>
                                     <a href="{{ url('/facturas/' . $item->id . '/edit') }}" title="Edit Factura"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
 
                                     <form method="POST" action="{{ url('/facturas' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
