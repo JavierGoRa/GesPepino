@@ -8,7 +8,6 @@
                 <a href="{{ url('/facturas/create') }}" class="btn btn-success btn-sm" title="Add New Factura">
                     <i class="fa fa-plus" aria-hidden="true"></i> Crear Factura
                 </a>
-
                 <form method="GET" action="{{ url('/facturas') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">

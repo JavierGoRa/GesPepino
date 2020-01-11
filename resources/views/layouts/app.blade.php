@@ -37,6 +37,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                        <li class="nav-item active"><a class="nav-link" href="{{url('facturas')}}">Facturas</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{{url('presupuestos')}}">Presupuestos</a></li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
