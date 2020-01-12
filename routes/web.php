@@ -20,6 +20,9 @@ Route::resource('trabajos', 'TrabajosController');
 
 Route::resource('presupuestos', 'PresupuestosController');
 
+Route::get('presupuestos/ajax/get/trabajos', 'PresupuestosController@getTrabajos')->name('presupuestos.getTrabajos');
+Route::get('presupuestos/pdf/{id}', 'PresupuestosController@generarPDF');
+Route::get('presupuestos/email/{id}', 'PresupuestosController@enviarFactura');
 
 Route::get('facturas/ajax/get/trabajos', 'FacturasController@getTrabajos')->name('facturas.getTrabajos');
 Route::get('facturas/pdf/{id}', 'FacturasController@generarPDF');

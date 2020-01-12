@@ -6,9 +6,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
-use App\Mail\facturaMail;
+use App\Mail\presupuestoMail;
 
-use App\Trabajo;
+use App\Presupuestotrabajo;
 use App\Presupuesto;
 use Illuminate\Http\Request;
 
@@ -27,7 +27,7 @@ class PresupuestosController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $facturas = Presupuesto::where('direccion', 'LIKE', "%$keyword%")
+            $presupuestos = Presupuesto::where('direccion', 'LIKE', "%$keyword%")
                 ->orWhere('ciudad', 'LIKE', "%$keyword%")
                 ->orWhere('codigo_postal', 'LIKE', "%$keyword%")
                 ->orWhere('dni', 'LIKE', "%$keyword%")
@@ -47,10 +47,10 @@ class PresupuestosController extends Controller
                 ->orWhere('importe', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $facturas = Presupuesto::latest()->paginate($perPage);
+            $presupuestos = Presupuesto::latest()->paginate($perPage);
         }
 
-        return view('facturas.index', compact('facturas'));
+        return view('presupuestos.index', compact('presupuestos'));
     }
 
     /**
@@ -60,7 +60,7 @@ class PresupuestosController extends Controller
      */
     public function create()
     {
-        return view('facturas.create');
+        return view('presupuestos.create');
     }
 
     /**
@@ -75,11 +75,11 @@ class PresupuestosController extends Controller
         
         $requestData = $request->all();
         
-        $factura = Presupuesto::create($requestData);
+        $presupuesto = Presupuesto::create($requestData);
 
         $trabajoData = array();
-        $trabajoData['iva'] = $factura->iva;
-        $trabajoData['id_factura'] = $factura->id;
+        $trabajoData['iva'] = $presupuesto->iva;
+        $trabajoData['id_presupuesto'] = $presupuesto->id;
 
         for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
             $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
@@ -88,11 +88,11 @@ class PresupuestosController extends Controller
             $trabajoData['descuento'] = $requestData['descuentos'][$i];
             $trabajoData['importe'] = $requestData['importes'][$i];
 
-            Trabajo::create($trabajoData);
+            Presupuestotrabajo::create($trabajoData);
         }
         
         
-        return redirect('facturas')->with('flash_message', 'Factura added!');
+        return redirect('presupuestos')->with('flash_message', 'Presupuesto added!');
     }
 
     /**
@@ -104,9 +104,9 @@ class PresupuestosController extends Controller
      */
     public function show($id)
     {
-        $factura = Presupuesto::findOrFail($id);
+        $presupuesto = Presupuesto::findOrFail($id);
 
-        return view('facturas.show', compact('factura'));
+        return view('presupuestos.show', compact('presupuesto'));
     }
 
     /**
@@ -118,9 +118,9 @@ class PresupuestosController extends Controller
      */
     public function edit($id)
     {
-        $factura = Presupuesto::findOrFail($id);
+        $presupuesto = Presupuesto::findOrFail($id);
 
-        return view('facturas.edit', compact('factura'));
+        return view('presupuestos.edit', compact('presupuesto'));
     }
 
     /**
@@ -136,14 +136,14 @@ class PresupuestosController extends Controller
         
         $requestData = $request->all();
         
-        $factura = Presupuesto::findOrFail($id);
-        $factura->update($requestData);
+        $presupuesto = Presupuesto::findOrFail($id);
+        $presupuesto->update($requestData);
 
-        Trabajo::where('id_factura', $factura->id)->delete();
+        Presupuestotrabajo::where('id_presupuesto', $presupuesto->id)->delete();
 
         $trabajoData = array();
-        $trabajoData['iva'] = $factura->iva;
-        $trabajoData['id_factura'] = $factura->id;
+        $trabajoData['iva'] = $presupuesto->iva;
+        $trabajoData['id_presupuesto'] = $presupuesto->id;
 
         for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
             $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
@@ -152,10 +152,10 @@ class PresupuestosController extends Controller
             $trabajoData['descuento'] = $requestData['descuentos'][$i];
             $trabajoData['importe'] = $requestData['importes'][$i];
 
-            Trabajo::create($trabajoData);
+            Presupuestotrabajo::create($trabajoData);
         }
 
-        return redirect('facturas')->with('flash_message', 'Factura updated!');
+        return redirect('presupuestos')->with('flash_message', 'Presupuesto updated!');
     }
 
     /**
@@ -169,15 +169,15 @@ class PresupuestosController extends Controller
     {
         Presupuesto::destroy($id);
 
-        return redirect('facturas')->with('flash_message', 'Factura deleted!');
+        return redirect('presupuestos')->with('flash_message', 'Presupuesto deleted!');
     }
 
-    public function getTrabajos(Request $request){
+    public function getPresupuestotrabajos(Request $request){
         
         $jsondata = array();
 
         $a = 0;
-        foreach (Trabajo::where('id_factura', $request->id)->get() as $value) {
+        foreach (Presupuestotrabajo::where('id_presupuesto', $request->id)->get() as $value) {
 
             $jsondata['descripciones'][$a] = $value->descripcion;
             $jsondata['cantidades'][$a] = $value->cantidad;
@@ -194,12 +194,12 @@ class PresupuestosController extends Controller
 
     public function generarPDF($id){
 
-        $factura = Presupuesto::find($id);
+        $presupuesto = Presupuesto::find($id);
 
         $trabajos = array();
 
         $a = 0;
-        foreach (Trabajo::where('id_factura', $id)->get() as $value) {
+        foreach (Presupuestotrabajo::where('id_presupuesto', $id)->get() as $value) {
 
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
@@ -210,20 +210,20 @@ class PresupuestosController extends Controller
 
         }
 
-        $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
+        $pdf = PDF::loadView('/presupuestos.presupuestospdf', array('presupuesto' => $presupuesto, 'trabajos' => $trabajos))->setPaper('a4');
 
-        return $pdf->download('factura.pdf');
+        return $pdf->download('presupuesto.pdf');
 
     }
 
-    public function enviarFactura(Request $request, $id){
+    public function enviarPresupuesto(Request $request, $id){
 
-        $factura = Presupuesto::find($id);
+        $presupuesto = Presupuesto::find($id);
 
         $trabajos = array();
 
         $a = 0;
-        foreach (Trabajo::where('id_factura', $id)->get() as $value) {
+        foreach (Presupuestotrabajo::where('id_presupuesto', $id)->get() as $value) {
 
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
@@ -234,16 +234,37 @@ class PresupuestosController extends Controller
 
         }
 
-        $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
+        $pdf = PDF::loadView('/presupuestos.presupuestospdf', array('presupuesto' => $presupuesto, 'trabajos' => $trabajos))->setPaper('a4');
 
-        $pdfPath = 'factura' . $factura->id . '.pdf';
+        $pdfPath = 'presupuesto' . $presupuesto->id . '.pdf';
         $pdf->save(storage_path('../public/'.$pdfPath));
 
 
-        Mail::to($factura->email_cliente, "Javier")
-        ->send(new facturaMail($pdfPath));
+        Mail::to($presupuesto->email_cliente, "Javier")
+        ->send(new presupuestoMail($pdfPath));
 
         return true;
+
+    }
+
+    
+    public function getTrabajos(Request $request){
+        
+        $jsondata = array();
+
+        $a = 0;
+        foreach (Presupuestotrabajo::where('id_presupuesto', $request->id)->get() as $value) {
+
+            $jsondata['descripciones'][$a] = $value->descripcion;
+            $jsondata['cantidades'][$a] = $value->cantidad;
+            $jsondata['precios'][$a] = $value->precio_u;
+            $jsondata['descuentos'][$a] = $value->descuento;
+            $jsondata['importes'][$a] = $value->importe;
+            $a++;
+
+        }
+
+        echo json_encode($jsondata);
 
     }
 }

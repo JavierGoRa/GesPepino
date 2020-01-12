@@ -6,9 +6,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit Factura #{{ $factura->id }}</div>
+                    <div class="card-header">Edit Presupuesto #{{ $presupuesto->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/facturas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/presupuestos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -20,11 +20,11 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/facturas/' . $factura->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/presupuestos/' . $presupuesto->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
-                            @include ('facturas.form', ['formMode' => 'edit'])
+                            @include ('presupuestos.form', ['formMode' => 'edit'])
 
                         </form>
 
@@ -48,7 +48,7 @@
 
         $.ajax({
 
-            url: "{{ route('facturas.getTrabajos') }}?id=" + {{$factura->id}},
+            url: "{{ route('presupuestos.getTrabajos') }}?id=" + {{$presupuesto->id}},
             method: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -137,7 +137,7 @@
         });
 
 
-        $('#calcular_factura').click(function(){
+        $('#calcular_presupuesto').click(function(){
         var importe = 0;
 
             if ($('#iva').val() != '') {
