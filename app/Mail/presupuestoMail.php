@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class facturaMail extends Mailable
+class presupuestoMail extends Mailable
 {
     use Queueable, SerializesModels;
     private $pdfPath;
@@ -30,7 +30,7 @@ class facturaMail extends Mailable
     public function build()
     {
         $this->view('mail')
-            ->subject('Factura')
+            ->subject('Presupuesto')
             ->attach( asset($this->pdfPath));
 
         return back();

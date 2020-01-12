@@ -8,13 +8,18 @@
             <div style="margin-botton:50px">
 
                 <div style="float:left">
-                    <img src="{{ asset('images/logo.jpg') }}" width="100px"> 
+                    <img src="{{ asset('images/logo.png') }}" width="100px"> 
                 </div>
 
                 <div style="float:right"> 
                     <h1>Factura</h1>
-                    <h1>Fontaneria Juan Carlos</h1>
                 </div>
+            </div>
+
+            <span style="clear:left"></span>
+
+            <div>
+                <h1>Fontaneria Juan Carlos</h1>
             </div>
 
             <span style="clear:left"></span>
@@ -24,6 +29,9 @@
                 <table>
                     <tr>
                         <td align="center"><b> Datos de la empresa: </b></td>
+                    </tr>
+                    <tr>
+                        <td>Juan Carlos</td>
                     </tr>
                     <tr>
                         <td>{{$factura->direccion}}</td>
@@ -93,8 +101,8 @@
 
         <br><br>
 
-        <div>
-            <table style="border-collapse: collapse;border: 1px solid black" class="table" width="100%">
+        <div style="border-style:solid;height:40%">
+            <table class="table" width="100%">
             
                 <tr color="blue">
 

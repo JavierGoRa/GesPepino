@@ -216,7 +216,7 @@ class PresupuestosController extends Controller
 
     }
 
-    public function enviarPresupuesto(Request $request, $id){
+    public function enviarFactura(Request $request, $id){
 
         $presupuesto = Presupuesto::find($id);
 

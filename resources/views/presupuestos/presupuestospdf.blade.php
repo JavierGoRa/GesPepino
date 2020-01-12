@@ -8,13 +8,18 @@
             <div style="margin-botton:50px">
 
                 <div style="float:left">
-                    <img src="{{ asset('images/logo.jpg') }}" width="100px"> 
+                    <img src="{{ asset('images/logo.png') }}" width="100px"> 
                 </div>
 
                 <div style="float:right"> 
                     <h1>Presupuesto</h1>
-                    <h1>Fontaneria Juan Carlos</h1>
                 </div>
+            </div>
+
+            <span style="clear:left"></span>
+
+            <div>
+                <h1>Fontaneria Juan Carlos</h1>
             </div>
 
             <span style="clear:left"></span>
@@ -24,6 +29,9 @@
                 <table>
                     <tr>
                         <td align="center"><b> Datos de la empresa: </b></td>
+                    </tr>
+                    <tr>
+                        <td>Juan Carlos</td>
                     </tr>
                     <tr>
                         <td>{{$presupuesto->direccion}}</td>
@@ -93,8 +101,8 @@
 
         <br><br>
 
-        <div>
-            <table style="border-collapse: collapse;border: 1px solid black" class="table" width="100%">
+        <div style="border-style:solid;height:40%">
+            <table class="table" width="100%">
             
                 <tr color="blue">
 
@@ -128,6 +136,60 @@
 
                 
             </table>
+        </div>
+
+        
+        <div style="position:fixed;left:0;bottom:130;width:100%">
+
+            <table style="border: 1px solid black" width="100%">
+                <tr>
+                    <td width="33%">
+                    
+                    </td>
+                    <td width="33%">
+                        <table width="100%">
+                            <tr width="66%">
+                                <td align="center"><b>Base Imponible</b></td><td align="center"><b>IVA %</b></td>
+                            </tr>
+                            <tr width="33%">
+                                <td align="center">{{number_format($baseImponible, 2)}}</td><td align="center">{{$presupuesto->iva}} %</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="33%">
+                        <table>
+                            <tr>
+                                <td align="center"><b>TOTAL</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->importe}} €</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+            
+<br>
+
+            <table width="100%">
+                <tr>
+                    <td width="60%">
+                        <table style="border: 1px solid black" width="100%">
+                            <tr><td><b>Sucursal: </b></td><td>{{$presupuesto->sucursal}}</td></tr>
+                            <tr><td><b>IBAN: </b></td><td>{{$presupuesto->iban}}</td></tr>
+                            <tr><td><b>BIC/SWIFT: </b></td><td>{{$presupuesto->bic_switch}}</td></tr>
+                        </table>
+                    </td>
+                    <td width="40%">
+                        <table width="100%">
+                            <tr><td clign="center"><b>Concepto</b></td></tr>
+                            <tr><td>{{$presupuesto->concepto}}</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
         </div>
 
 

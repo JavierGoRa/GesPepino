@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Crear Presupuesto</div>
                     <div class="card-body">
-                        <a href="{{ url('/presupuestos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/facturas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -19,10 +19,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/presupuestos') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/facturas') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('presupuestos.form', ['formMode' => 'create'])
+                            @include ('facturas.form', ['formMode' => 'create'])
 
                         </form>
 
@@ -99,7 +99,7 @@
         });
 
 
-        $('#calcular_presupuesto').click(function(){
+        $('#calcular_factura').click(function(){
             var importe = 0;
 
             if ($('#iva').val() != '') {
