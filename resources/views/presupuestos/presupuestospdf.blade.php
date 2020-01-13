@@ -1,95 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Presupuesto {{$presupuesto->id}}</title>
+        <title>Factura {{$presupuesto->id}}</title>
     </head>
     <body>
-        <div style="height:33%">
-            <div style="margin-botton:50px">
+        <div style="height:20%">
+            <div style="margin-botton:5px">
 
-                <div style="float:left">
-                    <img src="{{ asset('images/logo.png') }}" width="100px"> 
-                </div>
+            <table width="100%">
+                <tr>
+                    <td colspan="2"><h1>Fontaneria López García</h1></td>
+                    <td align="right"><h1>Presupuesto</h1></td>
+                </tr>
 
-                <div style="float:right"> 
-                    <h1>Presupuesto</h1>
-                </div>
-            </div>
+                <tr>
+                    <td><img src="{{ asset('images/logo.png') }}" width="100px"></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="center"><b> Datos de la empresa: </b></td>
+                            </tr>
+                            <tr>
+                                <td>Juan Carlos López Ortiz {{$presupuesto->dni}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->direccion}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->ciudad . " " . $presupuesto->codigo_postal}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->telefono_personal}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->email}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            
+                            <tr>
+                                <td align="center"><b> Datos del Cliente:</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->nombre_cliente . " " . $presupuesto->dni_cliente}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->direccion_cliente}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->ciudad_cliente . " " . $presupuesto->codigo_postal_cliente}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$presupuesto->email_cliente}}</td>
+                            </tr>
 
-            <span style="clear:left"></span>
+                        </table>
+                    </td>
+                </tr>
 
-            <div>
-                <h1>Fontaneria Juan Carlos</h1>
-            </div>
-
-            <span style="clear:left"></span>
-            
-            <div style="float:left">     
-
-                <table>
-                    <tr>
-                        <td align="center"><b> Datos de la empresa: </b></td>
-                    </tr>
-                    <tr>
-                        <td>Juan Carlos</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->direccion}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->ciudad}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->codigo_postal}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->dni}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->telefono_personal}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->email}}</td>
-                    </tr>
-                </table>
-            
-            </div>
-
-            <div style="float:right;width=50%">
-                
-                <table>
-                
-                    <tr>
-                    
-                        <td align="center"><b> Datos del Cliente:</b></td>
-
-                    </tr>
-
-                    <tr>
-                        <td>{{$presupuesto->nombre_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->direccion_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->ciudad_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->codigo_postal_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->dni_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$presupuesto->email_cliente}}</td>
-                    </tr>
-
-                </table>
-            
-            </div>
-
+            </table>
 
         </div>
+
+    </div>
+
+<br>
 
         <div>
                         
@@ -101,7 +78,7 @@
 
         <br><br>
 
-        <div style="border-style:solid;height:40%">
+        <div style="border-style:solid;height:65%">
             <table class="table" width="100%">
             
                 <tr color="blue">
@@ -139,7 +116,7 @@
         </div>
 
         
-        <div style="position:fixed;left:0;bottom:130;width:100%">
+        <div style="position:fixed;left:0;bottom:30;width:100%">
 
             <table style="border: 1px solid black" width="100%">
                 <tr>
@@ -169,29 +146,8 @@
                 </tr>
 
             </table>
-            
-<br>
-
-            <table width="100%">
-                <tr>
-                    <td width="60%">
-                        <table style="border: 1px solid black" width="100%">
-                            <tr><td><b>Sucursal: </b></td><td>{{$presupuesto->sucursal}}</td></tr>
-                            <tr><td><b>IBAN: </b></td><td>{{$presupuesto->iban}}</td></tr>
-                            <tr><td><b>BIC/SWIFT: </b></td><td>{{$presupuesto->bic_switch}}</td></tr>
-                        </table>
-                    </td>
-                    <td width="40%">
-                        <table width="100%">
-                            <tr><td clign="center"><b>Concepto</b></td></tr>
-                            <tr><td>{{$presupuesto->concepto}}</td></tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
 
         </div>
-
 
     </body>
 </html>

@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{asset('images/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{asset('images/logo.png') }}">
 
     <title>Ges - Facturas</title>
 

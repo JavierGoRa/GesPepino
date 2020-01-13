@@ -4,92 +4,69 @@
         <title>Factura {{$factura->id}}</title>
     </head>
     <body>
-        <div style="height:33%">
-            <div style="margin-botton:50px">
+        <div style="height:20%">
+            <div style="margin-botton:5px">
 
-                <div style="float:left">
-                    <img src="{{ asset('images/logo.png') }}" width="100px"> 
-                </div>
+            <table width="100%">
+                <tr>
+                    <td colspan="2"><h1>Fontaneria López García</h1></td>
+                    <td align="right"><h1>Factura</h1></td>
+                </tr>
 
-                <div style="float:right"> 
-                    <h1>Factura</h1>
-                </div>
-            </div>
+                <tr>
+                    <td><img src="{{ asset('images/logo.png') }}" width="100px"></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="center"><b> Datos de la empresa: </b></td>
+                            </tr>
+                            <tr>
+                                <td>Juan Carlos López Ortiz {{$factura->dni}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->direccion}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->ciudad . " " . $factura->codigo_postal}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->telefono_personal}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->email}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            
+                            <tr>
+                                <td align="center"><b> Datos del Cliente:</b></td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->nombre_cliente . " " . $factura->dni_cliente}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->direccion_cliente}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->ciudad_cliente . " " . $factura->codigo_postal_cliente}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$factura->email_cliente}}</td>
+                            </tr>
 
-            <span style="clear:left"></span>
+                        </table>
+                    </td>
+                </tr>
 
-            <div>
-                <h1>Fontaneria Juan Carlos</h1>
-            </div>
-
-            <span style="clear:left"></span>
-            
-            <div style="float:left">     
-
-                <table>
-                    <tr>
-                        <td align="center"><b> Datos de la empresa: </b></td>
-                    </tr>
-                    <tr>
-                        <td>Juan Carlos</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->direccion}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->ciudad}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->codigo_postal}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->dni}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->telefono_personal}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->email}}</td>
-                    </tr>
-                </table>
-            
-            </div>
-
-            <div style="float:right;width=50%">
-                
-                <table>
-                
-                    <tr>
-                    
-                        <td align="center"><b> Datos del Cliente:</b></td>
-
-                    </tr>
-
-                    <tr>
-                        <td>{{$factura->nombre_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->direccion_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->ciudad_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->codigo_postal_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->dni_cliente}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{$factura->email_cliente}}</td>
-                    </tr>
-
-                </table>
-            
-            </div>
-
+            </table>
 
         </div>
+
+    </div>
+
+<br>
 
         <div>
                         
@@ -101,7 +78,7 @@
 
         <br><br>
 
-        <div style="border-style:solid;height:40%">
+        <div style="border-style:solid;height:53%">
             <table class="table" width="100%">
             
                 <tr color="blue">
