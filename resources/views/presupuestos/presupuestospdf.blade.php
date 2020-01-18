@@ -78,7 +78,7 @@
 
         <br><br>
 
-        <div style="border-style:solid;height:65%">
+        <div style="border-style:solid;height:60%">
             <table class="table" width="100%">
             
                 <tr color="blue">
@@ -116,7 +116,7 @@
         </div>
 
         
-        <div style="position:fixed;left:0;bottom:30;width:100%">
+        <div style="position:fixed;left:0;bottom:70;width:100%">
 
             <table style="border: 1px solid black" width="100%">
                 <tr>

@@ -169,14 +169,14 @@
         <td>
             <div class="form-group {{ $errors->has('iban') ? 'has-error' : ''}}">
                 <label for="iban" class="control-label">{{ 'Iban' }}</label>
-                <input class="form-control" name="iban" type="text" id="iban" value="{{ isset($factura->iban) ? $factura->iban : 'ES24 0081 0600 740001834593'}}" >
+                <input class="form-control" name="iban" type="text" id="iban" value="{{ isset($factura->iban) ? $factura->iban : 'ES24 0081 0600 7400 0183 4593'}}" >
                 {!! $errors->first('iban', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
         <td>
             <div class="form-group {{ $errors->has('bic_switch') ? 'has-error' : ''}}">
                 <label for="bic_switch" class="control-label">{{ 'Bic Switch' }}</label>
-                <input class="form-control" name="bic_switch" type="text" id="bic_switch" value="{{ isset($factura->bic_switch) ? $factura->bic_switch : ''}}" >
+                <input class="form-control" name="bic_switch" type="text" id="bic_switch" value="{{ isset($factura->bic_switch) ? $factura->bic_switch : 'BSABESBB'}}" >
                 {!! $errors->first('bic_switch', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
