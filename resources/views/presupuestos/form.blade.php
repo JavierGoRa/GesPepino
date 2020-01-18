@@ -16,6 +16,7 @@
                 {!! $errors->first('codigo_postal', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
+        <input type="hidden" name="email" value="fontaneriajuancarlosinfo@gmail.com">
         <td>
             <div class="form-group {{ $errors->has('ciudad') ? 'has-error' : ''}}">
                 <label for="ciudad" class="control-label">{{ 'Ciudad' }}</label>

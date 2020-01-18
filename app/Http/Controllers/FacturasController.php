@@ -72,27 +72,32 @@ class FacturasController extends Controller
      */
     public function store(Request $request)
     {
+
+        try {
+            $requestData = $request->all();
         
-        $requestData = $request->all();
-        
-        $factura = Factura::create($requestData);
-
-        $trabajoData = array();
-        $trabajoData['iva'] = $factura->iva;
-        $trabajoData['id_factura'] = $factura->id;
-
-        for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
-            $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
-            $trabajoData['cantidad'] = $requestData['cantidades'][$i];
-            $trabajoData['precio_u'] = $requestData['precios'][$i];
-            $trabajoData['descuento'] = $requestData['descuentos'][$i];
-            $trabajoData['importe'] = $requestData['importes'][$i];
-
-            Trabajo::create($trabajoData);
+            $factura = Factura::create($requestData);
+    
+            $trabajoData = array();
+            $trabajoData['iva'] = $factura->iva;
+            $trabajoData['id_factura'] = $factura->id;
+    
+            for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
+                $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
+                $trabajoData['cantidad'] = $requestData['cantidades'][$i];
+                $trabajoData['precio_u'] = $requestData['precios'][$i];
+                $trabajoData['descuento'] = $requestData['descuentos'][$i];
+                $trabajoData['importe'] = $requestData['importes'][$i];
+    
+                Trabajo::create($trabajoData);
+            }
+            
+            
+            return redirect('facturas')->with('flash_message', 'Factura added!');
+        } catch (\Throwable $th) {
+            true;
         }
         
-        
-        return redirect('facturas')->with('flash_message', 'Factura added!');
     }
 
     /**

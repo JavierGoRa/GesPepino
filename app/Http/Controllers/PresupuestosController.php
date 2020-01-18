@@ -72,27 +72,34 @@ class PresupuestosController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $presupuesto = Presupuesto::create($requestData);
 
-        $trabajoData = array();
-        $trabajoData['iva'] = $presupuesto->iva;
-        $trabajoData['id_presupuesto'] = $presupuesto->id;
+        try {
+                    
+            $requestData = $request->all();
+            
+            $presupuesto = Presupuesto::create($requestData);
 
-        for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
-            $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
-            $trabajoData['cantidad'] = $requestData['cantidades'][$i];
-            $trabajoData['precio_u'] = $requestData['precios'][$i];
-            $trabajoData['descuento'] = $requestData['descuentos'][$i];
-            $trabajoData['importe'] = $requestData['importes'][$i];
+            $trabajoData = array();
+            $trabajoData['iva'] = $presupuesto->iva;
+            $trabajoData['id_presupuesto'] = $presupuesto->id;
 
-            Presupuestotrabajo::create($trabajoData);
+            for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
+                $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
+                $trabajoData['cantidad'] = $requestData['cantidades'][$i];
+                $trabajoData['precio_u'] = $requestData['precios'][$i];
+                $trabajoData['descuento'] = $requestData['descuentos'][$i];
+                $trabajoData['importe'] = $requestData['importes'][$i];
+
+                Presupuestotrabajo::create($trabajoData);
+            }
+            
+            return redirect('presupuestos')->with('flash_message', 'Presupuesto added!');
+
+        } catch (\Throwable $th) {
+            true;
         }
-        
-        
-        return redirect('presupuestos')->with('flash_message', 'Presupuesto added!');
+
+
     }
 
     /**

@@ -8,6 +8,7 @@
                 {!! $errors->first('direccion', '<p class="help-block">:message</p>') !!}
             </div>
         </td>
+        <input type="hidden" name="email" value="fontaneriajuancarlosinfo@gmail.com">
         <td>
             <div class="form-group {{ $errors->has('codigo_postal') ? 'has-error' : ''}}">
                 <label for="codigo_postal" class="control-label">{{ 'Codigo Postal' }}</label>
