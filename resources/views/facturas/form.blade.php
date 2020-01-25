@@ -1,3 +1,8 @@
+<div class="form-group {{ $errors->has('id_factura_token') ? 'has-error' : ''}}">
+    <label for="id_factura_token" class="control-label">{{ 'Factura nº' }}</label>
+    <input class="form-control" name="id_factura_token" type="number" id="id_factura_token" value="{{ isset($factura->id_factura_token) ? $factura->id_factura_token : ''}}" >
+    {!! $errors->first('id_factura_token', '<p class="help-block">:message</p>') !!}
+</div>
 <table width="100%">
     <tr>
         <td>

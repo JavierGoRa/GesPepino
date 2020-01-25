@@ -70,7 +70,7 @@
 
         <div>
                         
-            <div width="50%">Factura: {{$factura->id}}</div>
+            <div width="50%">Factura: {{$factura->id_factura_token}}</div>
 
             <div width="50%">Fecha: {{ date("d-m-Y",strtotime( $factura->fecha ))}}</div>   
 

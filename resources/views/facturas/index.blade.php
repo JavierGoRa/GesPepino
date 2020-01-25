@@ -36,7 +36,7 @@
                         <tbody>
                         @foreach($facturas as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->id_factura_token }}</td>
                                 <td>{{ $item->nombre_cliente }}</td>
                                 <td>{{ date("d-m-Y",strtotime( $item->fecha )) }}</td>
                                 <td>{{ $item->dni_cliente }}</td>

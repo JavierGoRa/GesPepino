@@ -15,6 +15,7 @@ class CreateFacturasTable extends Migration
         Schema::create('facturas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('id_factura_token')->nullable();
             $table->string('direccion')->nullable();
             $table->string('ciudad')->nullable();
             $table->integer('codigo_postal')->nullable();
