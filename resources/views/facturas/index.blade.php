@@ -22,7 +22,7 @@
                 <br/>
                 <br/>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="table" class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -62,4 +62,39 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+
+        $("#table").DataTable({
+            "columnDefs": [ {
+                "targets": 'no-ordenar',
+                "orderable": false,
+            }],
+            "oLanguage": {
+                "sEmptyTable": "No hay registros disponibles",
+                "sInfo": "Hay _TOTAL_ registros. Mostrando de _START_ a _END_",
+                "sLoadingRecords": "Por favor espera - Cargando...",
+                "sinfoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "sSearch": "Filtro:",
+                "sLengthMenu": "Mostrar _MENU_",
+                "oPaginate": {
+                    "sLast": "Última página",
+                    "sFirst": "Primera",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior",
+                    "sEmptyTable": "No hay registros disponibles"
+                }
+            }
+        });
+
+
+    });
+</script>
+
 @endsection
