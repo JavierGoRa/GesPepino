@@ -83,7 +83,7 @@
             
                 <tr color="blue">
 
-                    <th width="55%" align="center">Descripción</th>
+                    <th width="55%" align="center">Concepto</th>
                     <th width="10%" align="center">Cant.</th>
                     <th width="10%" align="center">Pre. €</th>
                     <th width="10%" align="center">Des. %</th>
@@ -94,7 +94,7 @@
                     <?php
 
                         $baseImponible = 0;
-                        
+
                         for ($i=0; $i < count($trabajos['descripciones']); $i++) { 
 
                             $baseImponible += $trabajos['importes'][$i];
@@ -105,13 +105,13 @@
                                 echo "<td align='right'>" . $trabajos['precios'][$i]. "</td>";
                                 echo "<td align='right'>" . $trabajos['descuentos'][$i]. "</td>";
                                 echo "<td align='right'>" . $trabajos['importes'][$i]. "</td>";
-                        
+
                             echo "</tr>";
                         }
 
                     ?>
 
-                
+
             </table>
         </div>
 

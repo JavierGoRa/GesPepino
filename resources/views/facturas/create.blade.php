@@ -98,7 +98,6 @@
         
         });
 
-
         $('#calcular_factura').click(function(){
             var importe = 0;
 
@@ -123,6 +122,8 @@
             }
 
         });
+
+
 
     });
 

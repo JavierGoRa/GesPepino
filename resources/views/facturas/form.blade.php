@@ -119,7 +119,7 @@
 <table class="table" width="100%">
 
     <thead>
-        <th>Descripción</th>
+        <th>Concepto</th>
         <th>Cantidad</th>
         <th>Precio/u €</th>
         <th>Descuento %</th>
