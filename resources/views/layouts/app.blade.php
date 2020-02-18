@@ -1,3 +1,9 @@
+/*
+ *  Francisco Javier González Ramírez
+ *  javigora97@gmail.com
+ *
+*/
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
