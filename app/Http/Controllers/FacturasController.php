@@ -23,12 +23,7 @@ class FacturasController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-        $facturas = Factura::orderBy('id_factura_token')->latest()->paginate($perPage);
-        
-
-        return view('facturas.index', compact('facturas'));
+        return view('facturas.index');
     }
 
     /**

@@ -33,30 +33,9 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        @foreach($facturas as $item)
-                            <tr>
-                                <td>{{ $item->id_factura_token }}</td>
-                                <td>{{ $item->nombre_cliente }}</td>
-                                <td>{{ date("d-m-Y",strtotime( $item->fecha )) }}</td>
-                                <td>{{ $item->dni_cliente }}</td>
-                                <td>{{ $item->codigo_postal_cliente }}</td>
-                                <td>
-                                    <a href="{{ url('/facturas/pdf/' . $item->id) }}" title="Generar PDF"><button class="btn btn-info btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> </button></a>
-                                    <a href="{{ url('/facturas/email/' . $item->id) }}" title="Enviar Email"><button class="btn btn-info btn-sm"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></a>
-                                    <a href="{{ url('/facturas/' . $item->id . '/edit') }}" title="Edit Factura"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-
-                                    <form method="POST" action="{{ url('/facturas' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                        {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Factura" onclick="return confirm(&quot;¿Está seguro?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tbody id="tbodyFacturas">
                         </tbody>
                     </table>
-                    <div class="pagination-wrapper"> {!! $facturas->appends(['search' => Request::get('search')])->render() !!} </div>
                 </div>
 
             </div>
@@ -71,26 +50,18 @@
 
     $(document).ready(function() {
 
-        $("#table").DataTable({
-            "columnDefs": [ {
-                "targets": 'no-ordenar',
-                "orderable": false,
-            }],
-            "oLanguage": {
-                "sEmptyTable": "No hay registros disponibles",
-                "sInfo": "Hay _TOTAL_ registros. Mostrando de _START_ a _END_",
-                "sLoadingRecords": "Por favor espera - Cargando...",
-                "sinfoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                "sSearch": "Filtro:",
-                "sLengthMenu": "Mostrar _MENU_",
-                "oPaginate": {
-                    "sLast": "Última página",
-                    "sFirst": "Primera",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior",
-                    "sEmptyTable": "No hay registros disponibles"
-                }
+        
+        $.ajax({
+
+            url: 'https://ges-facturas.000webhostapp.com/facturas',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+
+                console.log(data);
+            
             }
+                
         });
 
 
