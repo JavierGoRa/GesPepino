@@ -203,5 +203,5 @@
 </div>
 
 <div class="form-group">
-    <button class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}"> {{ $formMode === 'edit' ? 'Actualizar' : 'Crear' }} </button>
+    <button class="btn btn-primary" type="button" id="btn_submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}"> {{ $formMode === 'edit' ? 'Actualizar' : 'Crear' }} </button>
 </div>

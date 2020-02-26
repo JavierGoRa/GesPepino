@@ -19,7 +19,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/facturas') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form id="form_store" method="POST" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @include ('facturas.form', ['formMode' => 'create'])
@@ -120,6 +120,19 @@
                 alert('Introcude un IVA');
                 $('#importe').val('');
             }
+
+        });
+
+        $('#btn_submit').click(function(){
+
+            $.ajax( {
+                type: "POST",
+                url: 'https://ges-facturas.000webhostapp.com/facturas/store',
+                data: $('#form_store').serialize(),
+                success: function( response ) {
+                    console.log( response );
+                }
+            } );
 
         });
 
