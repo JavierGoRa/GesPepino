@@ -84,13 +84,10 @@
 
                     $('#tbodyFacturas').append(tdTemplate);
                 });
-               
 
-            
             }
-                
-        });
 
+        });
 
     });
 </script>
