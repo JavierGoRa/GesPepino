@@ -126,26 +126,25 @@
 
         $('#btn_submit').click(function(){
 
-            var data = $("#form_store").serialize();
- 
+            let factura = JSON.stringify($("#form_store").serialize());
             $.ajax({
-                data: data,
-                type: "POST",
-                url: "https://ges-facturas.000webhostapp.com/facturas",
-                success: function(data){
-                    alert(data);
+                url:'https://ges-facturas.000webhostapp.com/api/create.php',
+                type:'POST',
+                data: factura,
+                success: function(response){
+                    console.log('Respuesta valida!');
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     alert('error ' + errorThrown);
-                }
+                },
+                dataType: 'json'
             });
-            
+
             return true;
 
         });
 
     });
-
 
 </script>
 
