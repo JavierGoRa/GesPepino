@@ -26,29 +26,9 @@ class PresupuestosController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $presupuestos = Presupuesto::where('direccion', 'LIKE', "%$keyword%")
-                ->orWhere('ciudad', 'LIKE', "%$keyword%")
-                ->orWhere('codigo_postal', 'LIKE', "%$keyword%")
-                ->orWhere('dni', 'LIKE', "%$keyword%")
-                ->orWhere('telefono_personal', 'LIKE', "%$keyword%")
-                ->orWhere('telefono_oficina', 'LIKE', "%$keyword%")
-                ->orWhere('email', 'LIKE', "%$keyword%")
-                ->orWhere('fecha', 'LIKE', "%$keyword%")
-                ->orWhere('direccion_cliente', 'LIKE', "%$keyword%")
-                ->orWhere('codigo_postal_cliente', 'LIKE', "%$keyword%")
-                ->orWhere('dni_cliente', 'LIKE', "%$keyword%")
-                ->orWhere('fecha_vencimiento', 'LIKE', "%$keyword%")
-                ->orWhere('concepto', 'LIKE', "%$keyword%")
-                ->orWhere('sucursal', 'LIKE', "%$keyword%")
-                ->orWhere('iban', 'LIKE', "%$keyword%")
-                ->orWhere('bic_switch', 'LIKE', "%$keyword%")
-                ->orWhere('iva', 'LIKE', "%$keyword%")
-                ->orWhere('importe', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $presupuestos = Presupuesto::latest()->paginate($perPage);
-        }
+       
+        $presupuestos = Presupuesto::orderBy('id', 'desc')->latest()->paginate($perPage);
+
 
         return view('presupuestos.index', compact('presupuestos'));
     }

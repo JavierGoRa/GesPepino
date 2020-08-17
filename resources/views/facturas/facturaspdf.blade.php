@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Factura {{$factura->id}}</title>
+        <title>Factura {{$factura->id_factura_token}}</title>
     </head>
     <body>
         <div style="height:20%">
@@ -101,10 +101,10 @@
                             echo "<tr>";
                             
                                 echo "<td align='left'>" . $trabajos['descripciones'][$i] . "</td>";
-                                echo "<td align='right'>" . $trabajos['cantidades'][$i]. "</td>";
-                                echo "<td align='right'>" . $trabajos['precios'][$i]. "</td>";
-                                echo "<td align='right'>" . $trabajos['descuentos'][$i]. "</td>";
-                                echo "<td align='right'>" . $trabajos['importes'][$i]. "</td>";
+                                echo "<td align='center'>" . $trabajos['cantidades'][$i]. "</td>";
+                                echo "<td align='center'>" . $trabajos['precios'][$i]. "</td>";
+                                echo "<td align='center'>" . $trabajos['descuentos'][$i]. "</td>";
+                                echo "<td align='center'>" . $trabajos['importes'][$i]. "</td>";
                         
                             echo "</tr>";
                         }
