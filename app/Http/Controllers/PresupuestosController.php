@@ -73,7 +73,7 @@ class PresupuestosController extends Controller
                 Presupuestotrabajo::create($trabajoData);
             }
             
-            return redirect('presupuestos')->with('flash_message', 'Presupuesto added!');
+            return redirect('presupuestos')->with('success', 'Presupuesto creado');
 
         } catch (\Throwable $th) {
             true;
@@ -142,7 +142,7 @@ class PresupuestosController extends Controller
             Presupuestotrabajo::create($trabajoData);
         }
 
-        return redirect('presupuestos')->with('flash_message', 'Presupuesto updated!');
+        return redirect('presupuestos')->with('success', 'Presupuesto actualizado');
     }
 
     /**
@@ -156,7 +156,7 @@ class PresupuestosController extends Controller
     {
         Presupuesto::destroy($id);
 
-        return redirect('presupuestos')->with('flash_message', 'Presupuesto deleted!');
+        return redirect('presupuestos')->with('success', 'Presupuesto eliminado');
     }
 
     public function getPresupuestotrabajos(Request $request){
@@ -230,7 +230,7 @@ class PresupuestosController extends Controller
         Mail::to($presupuesto->email_cliente, "Javier")
         ->send(new presupuestoMail($pdfPath));
 
-        return true;
+        return redirect('presupuestos')->with('success', 'Presupuesto enviado');
 
     }
 

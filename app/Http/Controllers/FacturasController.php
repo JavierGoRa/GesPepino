@@ -71,7 +71,7 @@ class FacturasController extends Controller
             }
             
             
-            return redirect('facturas')->with('flash_message', 'Factura added!');
+            return redirect('facturas')->with('success', 'Factura creada');
         } catch (\Throwable $th) {
             true;
         }
@@ -138,7 +138,7 @@ class FacturasController extends Controller
             Trabajo::create($trabajoData);
         }
 
-        return redirect('facturas')->with('flash_message', 'Factura updated!');
+        return redirect('facturas')->with('success', 'Factura actualizada');
     }
 
     /**
@@ -152,7 +152,7 @@ class FacturasController extends Controller
     {
         Factura::destroy($id);
 
-        return redirect('facturas')->with('flash_message', 'Factura deleted!');
+        return redirect('facturas')->with('success', 'Factura eliminada');
     }
 
     public function getTrabajos(Request $request){
@@ -226,7 +226,7 @@ class FacturasController extends Controller
         Mail::to($factura->email_cliente, "Javier")
         ->send(new facturaMail($pdfPath));
 
-        return true;
+        return redirect('facturas')->with('success', 'Correo enviado');
 
     }
 }
