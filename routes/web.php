@@ -27,5 +27,5 @@ Route::get('presupuestos/email/{id}', 'PresupuestosController@enviarFactura');
 Route::get('facturas/ajax/get/trabajos', 'FacturasController@getTrabajos')->name('facturas.getTrabajos');
 Route::get('facturas/pdf/{id}', 'FacturasController@generarPDF');
 Route::get('facturas/email/{id}', 'FacturasController@enviarFactura');
-
+Route::get('facturas/cambiarestado/{id}', 'FacturasController@cambiarEstado');
 

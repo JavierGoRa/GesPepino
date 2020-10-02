@@ -38,23 +38,39 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="text-center" >#</th>
                                 <th>Nombre</th>
-                                <th>Fecha</th>
-                                <th>DNI</th>
-                                <th>Codigo Postal</th>
-                                <th>Actions</th>
+                                <th class="text-center" >Pagada</th>
+                                <th class="text-center" >Fecha</th>
+                                <th class="text-center" >DNI</th>
+                                <th class="text-center" >Codigo Postal</th>
+                                <th class="text-center" >Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach($facturas as $item)
                             <tr>
-                                <td>{{ $item->id_factura_token }}</td>
+                                <td class="text-center">{{ $item->id_factura_token }}</td>
                                 <td>{{ $item->nombre_cliente }}</td>
-                                <td>{{ date("d-m-Y",strtotime( $item->fecha )) }}</td>
-                                <td>{{ $item->dni_cliente }}</td>
-                                <td>{{ $item->codigo_postal_cliente }}</td>
-                                <td>
+
+                                @if( $item->estado == 0)
+                                    <td class="text-center">
+                                        <a href="{{action('FacturasController@cambiarEstado', ['id' => $item->id])}}">
+                                            <i class="fa fa-check-square" style="color:red"></i>
+                                        </a>
+                                    </td>
+                                @else
+                                    <td class="text-center">
+                                        <a href="{{action('FacturasController@cambiarEstado', ['id' => $item->id])}}">
+                                            <i class="fa fa-check-square" style="color:green"></i>
+                                        </a>
+                                    </td>
+                                @endif
+
+                                <td class="text-center">{{ date("d-m-Y",strtotime( $item->fecha )) }}</td>
+                                <td class="text-center">{{ $item->dni_cliente }}</td>
+                                <td class="text-center">{{ $item->codigo_postal_cliente }}</td>
+                                <td class="text-center">
                                     <a href="{{ url('/facturas/pdf/' . $item->id) }}" title="Generar PDF"><button class="btn btn-info btn-sm"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> </button></a>
                                     <a href="{{ url('/facturas/email/' . $item->id) }}" title="Enviar Email"><button class="btn btn-info btn-sm"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></a>
                                     <a href="{{ url('/facturas/' . $item->id . '/edit') }}" title="Edit Factura"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>

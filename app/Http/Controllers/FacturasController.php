@@ -229,4 +229,16 @@ class FacturasController extends Controller
         return redirect('facturas')->with('success', 'Correo enviado');
 
     }
+    
+    public function cambiarEstado(Request $request, $id){
+
+        $factura = Factura::findOrFail($id);
+
+        $factura->estado = !$factura->estado;
+
+        $factura->update();
+
+        return redirect('facturas')->with('success', 'Estado cambiado');
+
+    }
 }
