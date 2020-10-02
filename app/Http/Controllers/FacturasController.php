@@ -38,6 +38,7 @@ class FacturasController extends Controller
      */
     public function create()
     {
+    
         return view('facturas.create');
     }
 

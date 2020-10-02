@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @php header('Access-Control-Allow-Origin: *'); @endphp
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -19,7 +20,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/facturas') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form id="form_store" method="POST" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @include ('facturas.form', ['formMode' => 'create'])
@@ -98,7 +99,6 @@
         
         });
 
-
         $('#calcular_factura').click(function(){
             var importe = 0;
 
@@ -124,8 +124,27 @@
 
         });
 
-    });
+        $('#btn_submit').click(function(){
 
+            let factura = JSON.stringify($("#form_store").serialize());
+            $.ajax({
+                url:'https://ges-facturas.000webhostapp.com/api/create.php',
+                type:'POST',
+                data: factura,
+                success: function(response){
+                    console.log('Respuesta valida!');
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert('error ' + errorThrown);
+                },
+                dataType: 'json'
+            });
+
+            return true;
+
+        });
+
+    });
 
 </script>
 

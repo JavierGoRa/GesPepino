@@ -119,7 +119,7 @@
 <table class="table" width="100%">
 
     <thead>
-        <th>Descripción</th>
+        <th>Concepto</th>
         <th>Cantidad</th>
         <th>Precio/u €</th>
         <th>Descuento %</th>
@@ -192,10 +192,11 @@
     <input class="form-control col-md-2" name="iva" type="number" id="iva" value="{{ isset($factura->iva) ? $factura->iva : ''}}" step="any">
     {!! $errors->first('iva', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group">
 
-<button type="button" id="calcular_factura" class="btn btn-success"><i class="fa fa-euro"> Calcular factura</i></button>
+<div class="form-group">
+    <button type="button" id="calcular_factura" class="btn btn-success"><i class="fa fa-euro"> Calcular factura</i></button>
 </div>
+
 <div class="form-group {{ $errors->has('importe') ? 'has-error' : ''}}">
     <label for="importe" class="control-label">{{ 'Importe' }}</label>
     <input class="form-control" name="importe" type="number" id="importe" value="{{ isset($factura->importe) ? $factura->importe : ''}}" step="any">
@@ -203,5 +204,5 @@
 </div>
 
 <div class="form-group">
-    <button class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}"> {{ $formMode === 'edit' ? 'Actualizar' : 'Crear' }} </button>
+    <button class="btn btn-primary" type="button" id="btn_submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}"> {{ $formMode === 'edit' ? 'Actualizar' : 'Crear' }} </button>
 </div>

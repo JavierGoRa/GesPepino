@@ -83,7 +83,7 @@
             
                 <tr color="blue">
 
-                    <th width="55%" align="center">Descripción</th>
+                    <th width="55%" align="center">Concepto</th>
                     <th width="10%" align="center">Cant.</th>
                     <th width="10%" align="center">Pre. €</th>
                     <th width="10%" align="center">Des. %</th>

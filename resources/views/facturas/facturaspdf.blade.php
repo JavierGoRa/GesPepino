@@ -109,12 +109,12 @@
                             $baseImponible += $trabajos['importes'][$i];
                             echo "<tr>";
                             
-                                echo "<td align='left' style='font-family:monospace'>" . $trabajos['descripciones'][$i] . "</td>";
-                                echo "<td align='center'>" . $trabajos['cantidades'][$i]. "</td>";
-                                echo "<td align='center'>" . $trabajos['precios'][$i]. "</td>";
-                                echo "<td align='center'>" . $trabajos['descuentos'][$i]. "</td>";
-                                echo "<td align='center'>" . $trabajos['importes'][$i]. "</td>";
-                        
+                                echo "<td align='left'>" . $trabajos['descripciones'][$i] . "</td>";
+                                echo "<td align='right'>" . $trabajos['cantidades'][$i]. "</td>";
+                                echo "<td align='right'>" . $trabajos['precios'][$i]. "</td>";
+                                echo "<td align='right'>" . $trabajos['descuentos'][$i]. "</td>";
+                                echo "<td align='right'>" . $trabajos['importes'][$i]. "</td>";
+
                             echo "</tr>";
                         ?>
 

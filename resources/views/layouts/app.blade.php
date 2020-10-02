@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="{{asset('images/logo.png') }}">
 
     <title>Ges - Facturas</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
