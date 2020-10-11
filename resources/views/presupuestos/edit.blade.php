@@ -6,9 +6,9 @@
 
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit Presupuesto #{{ $presupuesto->id }}</div>
+                    <div class="card-header">Editar Presupuesto #{{ $presupuesto->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/presupuestos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/presupuestos') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
