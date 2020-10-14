@@ -196,7 +196,9 @@ class FacturasController extends Controller
 
         $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
 
-        return $pdf->download('factura' . $factura->fecha . '_' . $factura->id_factura_token . '.pdf');
+        $fecha = date("d/m/Y", strtotime($factura->fecha));
+
+        return $pdf->download('factura' . $fecha . '_' . $factura->id_factura_token . '.pdf');
 
     }
 
@@ -220,7 +222,9 @@ class FacturasController extends Controller
 
         $pdf = PDF::loadView('/facturas.facturaspdf', array('factura' => $factura, 'trabajos' => $trabajos))->setPaper('a4');
 
-        $pdfPath = 'factura' . $factura->fecha . '_' . $factura->id_factura_token . '.pdf';
+        $fecha = date("d_m_Y", strtotime($factura->fecha));
+
+        $pdfPath = 'factura' . $fecha . '_' . $factura->id_factura_token . '.pdf';
         $pdf->save(storage_path('../public/'.$pdfPath));
 
         Mail::to($factura->email_cliente, "Javier")

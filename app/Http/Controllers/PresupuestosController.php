@@ -198,8 +198,10 @@ class PresupuestosController extends Controller
         }
 
         $pdf = PDF::loadView('/presupuestos.presupuestospdf', array('presupuesto' => $presupuesto, 'trabajos' => $trabajos))->setPaper('a4');
+        
+        $fecha = date("d/m/Y", strtotime($presupuesto->fecha));
 
-        return $pdf->download('presupuesto.pdf');
+        return $pdf->download('presupuesto' . $fecha . '.pdf');
 
     }
 
@@ -223,7 +225,9 @@ class PresupuestosController extends Controller
 
         $pdf = PDF::loadView('/presupuestos.presupuestospdf', array('presupuesto' => $presupuesto, 'trabajos' => $trabajos))->setPaper('a4');
 
-        $pdfPath = 'presupuesto' . $presupuesto->id . '.pdf';
+        $fecha = date("d_m_Y", strtotime($presupuesto->fecha));
+
+        $pdfPath = 'Presupuesto' . $fecha . '.pdf';
         $pdf->save(storage_path('../public/'.$pdfPath));
 
 
