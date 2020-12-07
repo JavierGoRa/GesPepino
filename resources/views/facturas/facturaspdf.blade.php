@@ -20,14 +20,30 @@
         $baseImponible += $trabajos['importes'][$a];
 
         $columna += ceil(strlen($trabajos['descripciones'][$a]) / 36); // Upper Round y conteo de caracteres
+        $coluMNA += 0.5;
+
+        if ($columna >= 30 || count($trabajos['descripciones']) == ($i + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
+
+            if (!is_string($pagina)) {
+                ++$pagina;
+            }
+
+
+            
+        }
 
     }
+
+    dd($columna);
 
     if ($columna <= 30) {
         $pagina = 'Única';
     }
 
+    //Reinicio de variables
     $columna = 0;
+    $pagina = 0;
+    
 
     //36 caracteres de ancho y 30 caracteres de alto
 
@@ -35,6 +51,7 @@
 
         $arrayTrabajos[] = $i;
         $columna += ceil(strlen($trabajos['descripciones'][$i]) / 36); // Upper Round y conteo de caracteres
+        $coluMNA += 0.5;
 
         if ($columna >= 30 || count($trabajos['descripciones']) == ($i + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
 
