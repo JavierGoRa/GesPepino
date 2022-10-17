@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- <input type="hidden" name="url"> -->
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Crear Presupuesto</div>
+                    <div class="card-header">Crear Factura</div>
                     <div class="card-body">
-                        <a href="{{ url('/facturas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/facturas') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
@@ -37,11 +39,23 @@
 
 <script>
 
-    function deleteRowTrabajo(id){
+    function editRowTrabajo(id){
+
+        $('#descripcion_trabajo').val($('#trabajo' + id).children().eq(0).children().val());
+        $('#cantidad_trabajo').val($('#trabajo' + id).children().eq(1).children().val());
+        $('#preciou_trabajo').val($('#trabajo' + id).children().eq(2).children().val());
+        $('#descuento_trabajo').val($('#trabajo' + id).children().eq(3).children().val());
+        $('#importe_trabajo').val($('#trabajo' + id).children().eq(4).children().val());
+
+    }
+
+    function deleteRowTrabajo(id){        
         $('#trabajo' + id).remove();
     }
 
     $(document).ready(function() {
+
+
         
         var tr = 0;
 
@@ -61,7 +75,7 @@
                         '<td>' + $('#preciou_trabajo').val() + ' <input type="hidden" name="precios[]" value="' + $('#preciou_trabajo').val() + '"></td>' +
                         '<td>' + descuento + '</td>' +
                         '<td>' + $('#importe_trabajo').val() + ' <input type="hidden" name="importes[]" class="importes" value="' + $('#importe_trabajo').val() + '"></td>' +
-                        '<td> <button type="button" class="btn btn-danger" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
+                        '<td> <button type="button" class="btn btn-warning btn-sm" onClick="editRowTrabajo(' + tr + ')"><i class="fa fa-pencil"></i></button> <button type="button" class="btn btn-danger btn-sm" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
                     '</tr>'
                 );
 

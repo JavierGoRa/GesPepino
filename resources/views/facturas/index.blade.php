@@ -1,10 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- <input type="hidden" name="urlPrev" id="urlPrev"> -->
+
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">Facturas</div>
             <div class="card-body">
+                <div id="anosSelectibles" class="form-group">
+                    <!-- Aquí irán todos los años elegibles para filtrar -->
+                    @foreach($fechasSelectibles as $item)
+                        @if ($item != null)
+
+                            @if($item == $anoSeleccionado)
+                                <a href="{{ url('/facturas?ano=' . $item) }}" class="btn btn-primary active">
+                            @else
+                                <a href="{{ url('/facturas?ano=' . $item) }}" class="btn btn-primary">
+                            @endif
+
+                                {{$item}}
+                            </a>
+
+                        @endif
+                    @endforeach
+                </div>
                 <a href="{{ url('/facturas/create') }}" class="btn btn-success btn-sm" title="Add New Factura">
                     <i class="fa fa-plus" aria-hidden="true"></i> Crear Factura
                 </a>
@@ -96,5 +115,16 @@
 
 @section('js')
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        /* console.log('@@@' + window.location.href);
+        $('#urlPrev').val(window.location.href); */
+
+
+
+    })
+</script>
 
 @endsection

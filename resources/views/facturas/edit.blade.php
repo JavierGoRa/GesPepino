@@ -39,6 +39,16 @@
 @section('js')
 
 <script>
+
+    function editRowTrabajo(id){
+
+        $('#descripcion_trabajo').val($('#trabajo' + id).children().eq(0).children().val());
+        $('#cantidad_trabajo').val($('#trabajo' + id).children().eq(1).children().val());
+        $('#preciou_trabajo').val($('#trabajo' + id).children().eq(2).children().val());
+        $('#descuento_trabajo').val($('#trabajo' + id).children().eq(3).children().val());
+        $('#importe_trabajo').val($('#trabajo' + id).children().eq(4).children().val());
+
+    }
     function deleteRowTrabajo(id){
         $('#trabajo' + id).remove();
     }
@@ -72,7 +82,7 @@
                             '<td>' + data['precios'][index] + ' <input type="hidden" name="precios[]" value="' + data['precios'][index] + '"></td>' +
                             '<td>' + data['descuentos'][index] + ' <input type="hidden" name="descuentos[]" value="' + data['descuentos'][index] + '">'  + '</td>' +
                             '<td>' + data['importes'][index] + ' <input type="hidden" name="importes[]" class="importes" value="' + data['importes'][index] + '"></td>' +
-                            '<td> <button type="button" class="btn btn-danger" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
+                            '<td> <button type="button" class="btn btn-warning btn-sm" onClick="editRowTrabajo(' + tr + ')"><i class="fa fa-pencil"></i></button> <button type="button" class="btn btn-danger btn-sm" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
                         '</tr>'
                     );
 
@@ -100,7 +110,7 @@
                         '<td>' + $('#preciou_trabajo').val() + ' <input type="hidden" name="precios[]" value="' + $('#preciou_trabajo').val() + '"></td>' +
                         '<td>' + descuento + '</td>' +
                         '<td>' + $('#importe_trabajo').val() + ' <input type="hidden" name="importes[]" class="importes" value="' + $('#importe_trabajo').val() + '"></td>' +
-                        '<td> <button type="button" class="btn btn-danger" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
+                        '<td> <button type="button" class="btn btn-warning btn-sm" onClick="editRowTrabajo(' + tr + ')"><i class="fa fa-pencil"></i></button> <button type="button" class="btn btn-danger btn-sm" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
                     '</tr>'
                 );
 

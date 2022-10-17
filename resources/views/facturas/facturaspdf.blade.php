@@ -9,7 +9,7 @@
 
     $toggleCorrector = true;
     $columna = 0;
-    $pagina = 0;
+    $paginaFinal = 0;
     $arrayTrabajos = [];
 
 
@@ -20,21 +20,16 @@
         $baseImponible += $trabajos['importes'][$a];
 
         $columna += ceil(strlen($trabajos['descripciones'][$a]) / 36); // Upper Round y conteo de caracteres
-        $coluMNA += 0.5;
+        $columna += 0.5;
 
-        if ($columna >= 30 || count($trabajos['descripciones']) == ($i + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
-
-            if (!is_string($pagina)) {
-                ++$pagina;
-            }
-
-
-            
+        if ($columna >= 30 || count($trabajos['descripciones']) == ($a + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
+            ++$paginaFinal;
+            $columna = 0;
         }
 
     }
 
-    dd($columna);
+    $precioIVA = $factura->importe - $baseImponible;
 
     if ($columna <= 30) {
         $pagina = 'Única';
@@ -51,7 +46,7 @@
 
         $arrayTrabajos[] = $i;
         $columna += ceil(strlen($trabajos['descripciones'][$i]) / 36); // Upper Round y conteo de caracteres
-        $coluMNA += 0.5;
+        $columna += 0.5;
 
         if ($columna >= 30 || count($trabajos['descripciones']) == ($i + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
 
@@ -198,10 +193,20 @@
                     <td width="33%">
                         <table width="100%">
                             <tr width="66%">
-                                <td align="center"><b>Base Imponible</b></td><td align="center"><b>IVA %</b></td>
+                                <td align="center">
+                                    @if($pagina == $paginaFinal)
+                                        <b>Base Imponible</b>
+                                    @endif
+                                </td>
+                                <td align="center"><b>IVA {{$factura->iva}} %</b></td>
                             </tr>
                             <tr width="33%">
-                                <td align="center">{{number_format($baseImponible, 2)}} €</td><td align="center">{{$factura->iva}} %</td>
+                                <td align="center">
+                                    @if($pagina == $paginaFinal)
+                                        {{number_format($baseImponible, 2)}} €
+                                    @endif
+                                </td>
+                                <td align="center">{{number_format($precioIVA, 2)}} €</td>
                             </tr>
                         </table>
                     </td>

@@ -13,7 +13,8 @@ use App\Factura;
 use Illuminate\Http\Request;
 
 use PDF;
-
+use DB;
+use Redirect;
 class FacturasController extends Controller
 {
     /**
@@ -25,10 +26,33 @@ class FacturasController extends Controller
     {
         $keyword = $request->get('search');
         $perPage = 25;
-        $facturas = Factura::orderBy('id_factura_token', 'desc')->latest()->paginate($perPage);
-        
 
-        return view('facturas.index', compact('facturas'));
+        $anoSeleccionado = null;
+
+        if($request->ano){
+            $anoSeleccionado = $request->ano;
+            $facturas = Factura::orderBy('fecha', 'desc')->whereYear('fecha', '=', $request->ano)->latest()->paginate($perPage);
+        } else {
+            $facturas = Factura::orderBy('fecha', 'desc')->latest()->paginate($perPage);
+        }
+
+        //dd($request);
+
+        $fechasSelectibles[] = array();
+        $fechas = Factura::select('fecha', 'id')->where('fecha', '!=', null)->get();
+
+        foreach ($fechas as $key => $value) {
+
+            $time = strtotime($value->fecha);
+            $newformat = date('Y',$time);
+
+            if(!in_array($newformat, $fechasSelectibles)){
+                array_push($fechasSelectibles, $newformat);
+            }
+
+        }
+
+        return view('facturas.index', compact('facturas', 'fechasSelectibles', 'anoSeleccionado'));
     }
 
     /**
@@ -36,9 +60,13 @@ class FacturasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        /* $urlPrev = $request->get('#urlPrev');
+
+        dd($urlPrev); */
     
+        //return view('facturas.create', compact('urlPrev'));
         return view('facturas.create');
     }
 
