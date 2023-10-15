@@ -117,7 +117,6 @@
         <th>Concepto</th>
         <th>Cantidad</th>
         <th>Precio/u €</th>
-        <th>Descuento %</th>
         <th>Importe €</th>
         <th></th>
     </thead>
@@ -131,9 +130,6 @@
             </td>
             <td>
                 <input class="form-control" id="preciou_trabajo" type="number" placeholder="Precio/Unidad" step="any">
-            </td>
-            <td>
-                <input class="form-control" id="descuento_trabajo" type="number" placeholder="Descuento" step="any">
             </td>
             <td>
                 <input class="form-control" id="importe_trabajo" type="number" disabled placeholder="Importe" step="any">

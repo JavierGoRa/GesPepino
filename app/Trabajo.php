@@ -25,7 +25,7 @@ class Trabajo extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_factura', 'descripcion', 'cantidad', 'precio_u', 'descuento', 'iva', 'importe'];
+    protected $fillable = ['id_factura', 'referencia', 'descripcion', 'referencia', 'cantidad', 'precio_u', 'iva', 'importe'];
 
     
 }

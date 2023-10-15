@@ -63,11 +63,10 @@ class PresupuestosController extends Controller
             $trabajoData['iva'] = $presupuesto->iva;
             $trabajoData['id_presupuesto'] = $presupuesto->id;
 
-            for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
-                $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
+            for ($i=0; $i < count($requestData['descripciones']); $i++) { 
+                $trabajoData['descripcion'] = $requestData['descripciones'][$i];
                 $trabajoData['cantidad'] = $requestData['cantidades'][$i];
                 $trabajoData['precio_u'] = $requestData['precios'][$i];
-                $trabajoData['descuento'] = $requestData['descuentos'][$i];
                 $trabajoData['importe'] = $requestData['importes'][$i];
 
                 Presupuestotrabajo::create($trabajoData);
@@ -132,11 +131,10 @@ class PresupuestosController extends Controller
         $trabajoData['iva'] = $presupuesto->iva;
         $trabajoData['id_presupuesto'] = $presupuesto->id;
 
-        for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
-            $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
+        for ($i=0; $i < count($requestData['descripciones']); $i++) { 
+            $trabajoData['descripcion'] = $requestData['descripciones'][$i];
             $trabajoData['cantidad'] = $requestData['cantidades'][$i];
             $trabajoData['precio_u'] = $requestData['precios'][$i];
-            $trabajoData['descuento'] = $requestData['descuentos'][$i];
             $trabajoData['importe'] = $requestData['importes'][$i];
 
             Presupuestotrabajo::create($trabajoData);
@@ -169,7 +167,6 @@ class PresupuestosController extends Controller
             $jsondata['descripciones'][$a] = $value->descripcion;
             $jsondata['cantidades'][$a] = $value->cantidad;
             $jsondata['precios'][$a] = $value->precio_u;
-            $jsondata['descuentos'][$a] = $value->descuento;
             $jsondata['importes'][$a] = $value->importe;
             $a++;
 
@@ -191,7 +188,6 @@ class PresupuestosController extends Controller
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
             $trabajos['precios'][$a] = $value->precio_u;
-            $trabajos['descuentos'][$a] = $value->descuento;
             $trabajos['importes'][$a] = $value->importe;
             $a++;
 
@@ -217,7 +213,6 @@ class PresupuestosController extends Controller
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
             $trabajos['precios'][$a] = $value->precio_u;
-            $trabajos['descuentos'][$a] = $value->descuento;
             $trabajos['importes'][$a] = $value->importe;
             $a++;
 
@@ -249,7 +244,6 @@ class PresupuestosController extends Controller
             $jsondata['descripciones'][$a] = $value->descripcion;
             $jsondata['cantidades'][$a] = $value->cantidad;
             $jsondata['precios'][$a] = $value->precio_u;
-            $jsondata['descuentos'][$a] = $value->descuento;
             $jsondata['importes'][$a] = $value->importe;
             $a++;
 

@@ -14,7 +14,7 @@
                 </tr>
 
                 <tr>
-                    <td><img src="{{ asset('images/logo.png') }}" width="100px"></td>
+                    <td><img src="{{ asset('images/logo1.png') }}" width="100px"></td>
                     <td>
                         <table>
                             <tr>
@@ -103,7 +103,6 @@
                                 echo "<td align='left'>" . $trabajos['descripciones'][$i] . "</td>";
                                 echo "<td align='right'>" . $trabajos['cantidades'][$i]. "</td>";
                                 echo "<td align='right'>" . $trabajos['precios'][$i]. "</td>";
-                                echo "<td align='right'>" . $trabajos['descuentos'][$i]. "</td>";
                                 echo "<td align='right'>" . $trabajos['importes'][$i]. "</td>";
                         
                             echo "</tr>";

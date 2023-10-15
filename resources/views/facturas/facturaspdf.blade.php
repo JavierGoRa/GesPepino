@@ -31,7 +31,7 @@
 
     $precioIVA = $factura->importe - $baseImponible;
 
-    if ($columna <= 30) {
+    if ($columna <= 24) {
         $pagina = 'Única';
     }
 
@@ -48,13 +48,13 @@
         $columna += ceil(strlen($trabajos['descripciones'][$i]) / 36); // Upper Round y conteo de caracteres
         $columna += 0.5;
 
-        if ($columna >= 30 || count($trabajos['descripciones']) == ($i + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
+        if ($columna >= 24 || count($trabajos['descripciones']) == ($i + 1)) { //Entra si supera el limite o si supera la cantidad de trabajos
 
             if (!is_string($pagina)) {
                 ++$pagina;
             }
 
-            if ($columna > 30) {
+            if ($columna > 24) {
                 --$i;
                 array_pop($arrayTrabajos); //Extrae el ultimo valor del array
             }
@@ -76,20 +76,20 @@
 
                 <table width="100%">
                     <tr>
-                        <td colspan="2"><h1>Fontaneria López García</h1></td>
-                        <td align="right"><h1>FACTURA</h1></td>
+                        <td colspan="2"><h1>Talleres Pepino</h1></td>
+                        <td align="right"><h1>{{$factura->tipo_documento}}</h1></td>
                         <td align="right" width="100px"><p>Página: {{$pagina}}</p></td>
                     </tr>
 
                     <tr>
-                        <td><img src="{{ asset('images/logo.png') }}" width="100px"></td>
+                        <td><img src="{{ asset('images/logo1.png') }}" width="120px"></td>
                         <td style="align-content:center">
                             <table>
                                 <tr>
-                                    <td align="center"><b> Datos de la empresa: </b></td>
+                                    <td align="center"><b> Datos del taller: </b></td>
                                 </tr>
                                 <tr>
-                                    <td>Juan Carlos López Ortiz {{$factura->dni}}</td>
+                                    <td>Francisco José Vargas Fernández {{$factura->dni}}</td>
                                 </tr>
                                 <tr>
                                     <td>{{$factura->direccion}}</td>
@@ -137,8 +137,6 @@
         <br>
 
         <div>
-                        
-            <div width="50%">Factura: {{$factura->id_factura_token}}</div>
 
             <div width="50%">Fecha: {{ date("d-m-Y",strtotime( $factura->fecha ))}}</div>   
 
@@ -146,15 +144,27 @@
 
         <br>
 
-        <div style="border-style:solid;height:53%">
+        <div style="border-style:solid;height:2.5%">
+            <table class="table" width="100%">
+                <tr>
+                    <td align="center" style="font-size: 13px" width="20%">Marca: {{$factura->marca}}</td>
+                    <td align="center" style="font-size: 13px" width="25%">Modelo: {{$factura->modelo}}</td>
+                    <td align="center" style="font-size: 13px" width="22%">Matrícula: {{$factura->matricula}}</td>
+                    <td align="center" style="font-size: 13px" width="12%">KM {{$factura->kilometros}}</td>
+                    <td align="center" style="font-size: 13px" width="35%">VIN: {{$factura->bastidor}}</td>
+                </tr>
+        </table>
+        </div>
+        <div style="border-style:solid;height:40%">
             <table class="table" width="100%">
             
                 <tr color="blue">
 
+                    <th width="10%" align="center">Referencia</th>
                     <th width="55%" align="center">Descripción</th>
-                    <th width="10%" align="center">Cant.</th>
+                    <th width="5%" align="center">Cant.</th>
                     <th width="10%" align="center">Pre. €</th>
-                    <th width="10%" align="center">Des. %</th>
+                    <th width="5%" align="center">IVA</th>
                     <th width="15%" align="center">Importe €</th>
 
                 </tr>
@@ -165,10 +175,11 @@
 
                             echo "<tr>";
                             
+                                echo "<td>" . $trabajos['referencias'][$arrayTrabajos[$a]] . "</td>";
                                 echo "<td align='left' style='font-family: monospace'>" . $trabajos['descripciones'][$arrayTrabajos[$a]] . "</td>";
                                 echo "<td align='center'>" . $trabajos['cantidades'][$arrayTrabajos[$a]]. "</td>";
                                 echo "<td align='center'>" . $trabajos['precios'][$arrayTrabajos[$a]]. "</td>";
-                                echo "<td align='center'>" . $trabajos['descuentos'][$arrayTrabajos[$a]]. "</td>";
+                                echo "<td align='center'>" . $trabajos['ivas'][$arrayTrabajos[$a]]. "</td>";
                                 echo "<td align='center'>" . $trabajos['importes'][$arrayTrabajos[$a]]. "</td>";
     
                             echo "</tr>";
@@ -183,10 +194,17 @@
             </table>
         </div>
 
+        <div style="border-style:solid;height:10%">
+
+            <table width="100%">
+                <tr><td clign="center"><b>Descripción de trabajo</b></td><td clign="center">{{$factura->descripcion_trabajo}}</td></tr>
+            </table> 
+
+        </div>
         
         <div style="left:0;bottom:0;width:100%">
 
-            <table style="border: 1px solid black" width="100%">
+            <table style="border-style:solid" width="100%">
                 <tr>
                     <td width="33%">
                     </td>
@@ -236,8 +254,8 @@
                     </td>
                     <td width="40%">
                         <table width="100%">
-                            <tr><td clign="center"><b>Concepto</b></td></tr>
-                            <tr><td>{{$factura->concepto}}</td></tr>
+                            <tr><td clign="center"><b>Observaciones</b></td></tr>
+                            <tr><td>{{$factura->observaciones}}</td></tr>
                         </table>
                     </td>
                 </tr>

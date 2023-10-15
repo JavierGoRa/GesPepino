@@ -48,18 +48,12 @@
         $('#btn_anadir_trabajo').click(function(){
 
             if ($('#preciou_trabajo').val() != '') {
-                if ($('#descuento_trabajo').val() != '') {
-                    descuento = $('#descuento_trabajo').val() + ' <input type="hidden" name="descuentos[]" value="' + $('#descuento_trabajo').val() + '">' 
-                } else {
-                    descuento = '<input type="hidden" name="descuentos[]" value="0">' 
-                }
 
                 $('#tbodyTrabajos').append(
                     '<tr id="trabajo' + tr + '">' +
                         '<td>' + $('#descripcion_trabajo').val() + ' <input type="hidden" name="descrpciones[]" value="' + $('#descripcion_trabajo').val() + '"></td>' +
                         '<td>' + $('#cantidad_trabajo').val() + ' <input type="hidden" name="cantidades[]" value="' + $('#cantidad_trabajo').val() + '"></td>' +
                         '<td>' + $('#preciou_trabajo').val() + ' <input type="hidden" name="precios[]" value="' + $('#preciou_trabajo').val() + '"></td>' +
-                        '<td>' + descuento + '</td>' +
                         '<td>' + $('#importe_trabajo').val() + ' <input type="hidden" name="importes[]" class="importes" value="' + $('#importe_trabajo').val() + '"></td>' +
                         '<td> <button type="button" class="btn btn-danger" onClick="deleteRowTrabajo(' + tr + ')"><i class="fa fa-trash"></i></button> </td>' +
                     '</tr>'
@@ -81,11 +75,6 @@
 
                 if ($('#cantidad_trabajo').val() != '') {
                     precio = parseFloat($('#cantidad_trabajo').val()) * precio;
-                }
-
-                if ($('#descuento_trabajo').val() != '') {
-                    descuento = precio / 100 * parseFloat($('#descuento_trabajo').val())
-                    precio = precio - descuento;
                 }
 
                 $('#importe_trabajo').val(precio.toFixed(2));      

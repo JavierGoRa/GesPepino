@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\facturaMail;
 
 use App\Trabajo;
+use App\Cliente;
 use App\Factura;
 use Illuminate\Http\Request;
 
@@ -33,10 +34,18 @@ class FacturasController extends Controller
             $anoSeleccionado = $request->ano;
             $facturas = Factura::orderBy('fecha', 'desc')->whereYear('fecha', '=', $request->ano)->latest()->paginate($perPage);
         } else {
-            $facturas = Factura::orderBy('fecha', 'desc')->latest()->paginate($perPage);
+            
+            if (!empty($keyword)) {
+                $facturas = Factura::where('tipo_documento', 'LIKE', "%$keyword%")
+                    ->orWhere('nombre_cliente', 'LIKE', "%$keyword%")
+                    ->orWhere('dni_cliente', 'LIKE', "%$keyword%")
+                    ->orWhere('codigo_postal_cliente', 'LIKE', "%$keyword%")
+                    ->orWhere('matricula', 'LIKE', "%$keyword%")
+                    ->latest()->paginate($perPage);
+            } else {
+                $facturas = Factura::orderBy('fecha', 'desc')->latest()->paginate($perPage);
+            }
         }
-
-        //dd($request);
 
         $fechasSelectibles[] = array();
         $fechas = Factura::select('fecha', 'id')->where('fecha', '!=', null)->get();
@@ -62,12 +71,23 @@ class FacturasController extends Controller
      */
     public function create(Request $request)
     {
-        /* $urlPrev = $request->get('#urlPrev');
 
-        dd($urlPrev); */
+        try {
+
+            $factura = Factura::orderby('id_factura_token', 'desc')->latest()->get()[0];
+            $facturaToken = ++$factura->id_factura_token;
     
-        //return view('facturas.create', compact('urlPrev'));
-        return view('facturas.create');
+            //++$factura->id_factura_token;
+            $tiposDocumentos = ['Factura', 'Albarán', 'Presupuesto', 'O.T.'];
+            $clientes = Cliente::orderby('id')->latest();
+
+            return view('facturas.create', compact('facturaToken', 'tiposDocumentos', 'clientes'));
+
+        } catch (\Throwable $th) {
+            $tiposDocumentos = ['Factura', 'Albarán', 'Presupuesto'];
+            $clientes = Cliente::orderby('id')->latest();
+            return view('facturas.create', compact('tiposDocumentos', 'clientes'));
+        }
     }
 
     /**
@@ -82,6 +102,8 @@ class FacturasController extends Controller
 
         try {
             $requestData = $request->all();
+
+            dd($requestData);
         
             $factura = Factura::create($requestData);
     
@@ -90,15 +112,16 @@ class FacturasController extends Controller
             $trabajoData['id_factura'] = $factura->id;
     
             for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
+                $trabajoData['referencia'] = $requestData['referencias'][$i];
                 $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
                 $trabajoData['cantidad'] = $requestData['cantidades'][$i];
                 $trabajoData['precio_u'] = $requestData['precios'][$i];
-                $trabajoData['descuento'] = $requestData['descuentos'][$i];
+                $trabajoData['iva'] = $requestData['ivas'][$i];
                 $trabajoData['importe'] = $requestData['importes'][$i];
+
     
                 Trabajo::create($trabajoData);
             }
-            
             
             return redirect('facturas')->with('success', 'Factura creada');
         } catch (\Throwable $th) {
@@ -131,8 +154,11 @@ class FacturasController extends Controller
     public function edit($id)
     {
         $factura = Factura::findOrFail($id);
+        $tiposDocumentos = ['Factura', 'Albarán', 'Presupuesto', 'O.T.'];
+        $clientes = Cliente::orderby('nombre_cliente')->latest()->get();
+        $facturaToken = $factura->id_factura_token;
 
-        return view('facturas.edit', compact('factura'));
+        return view('facturas.edit', compact('factura', 'facturaToken', 'tiposDocumentos', 'clientes'));
     }
 
     /**
@@ -158,10 +184,11 @@ class FacturasController extends Controller
         $trabajoData['id_factura'] = $factura->id;
 
         for ($i=0; $i < count($requestData['descrpciones']); $i++) { 
+            $trabajoData['referencia'] = $requestData['referencias'][$i];
             $trabajoData['descripcion'] = $requestData['descrpciones'][$i];
             $trabajoData['cantidad'] = $requestData['cantidades'][$i];
             $trabajoData['precio_u'] = $requestData['precios'][$i];
-            $trabajoData['descuento'] = $requestData['descuentos'][$i];
+            $trabajoData['iva'] = $requestData['ivas'][$i];
             $trabajoData['importe'] = $requestData['importes'][$i];
 
             Trabajo::create($trabajoData);
@@ -191,10 +218,11 @@ class FacturasController extends Controller
         $a = 0;
         foreach (Trabajo::where('id_factura', $request->id)->get() as $value) {
 
+            $jsondata['referencias'][$a] = $value->referencia;
             $jsondata['descripciones'][$a] = $value->descripcion;
             $jsondata['cantidades'][$a] = $value->cantidad;
             $jsondata['precios'][$a] = $value->precio_u;
-            $jsondata['descuentos'][$a] = $value->descuento;
+            $jsondata['ivas'][$a] = $value->iva;
             $jsondata['importes'][$a] = $value->importe;
             $a++;
 
@@ -213,10 +241,11 @@ class FacturasController extends Controller
         $a = 0;
         foreach (Trabajo::where('id_factura', $id)->get() as $value) {
 
+            $trabajos['referencias'][$a] = $value->referencia;
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
             $trabajos['precios'][$a] = $value->precio_u;
-            $trabajos['descuentos'][$a] = $value->descuento;
+            $trabajos['ivas'][$a] = $value->iva;
             $trabajos['importes'][$a] = $value->importe;
             $a++;
 
@@ -239,10 +268,10 @@ class FacturasController extends Controller
         $a = 0;
         foreach (Trabajo::where('id_factura', $id)->get() as $value) {
 
+            $trabajos['referencias'][$a] = $value->referencia;
             $trabajos['descripciones'][$a] = $value->descripcion;
             $trabajos['cantidades'][$a] = $value->cantidad;
             $trabajos['precios'][$a] = $value->precio_u;
-            $trabajos['descuentos'][$a] = $value->descuento;
             $trabajos['importes'][$a] = $value->importe;
             $a++;
 
@@ -272,5 +301,16 @@ class FacturasController extends Controller
 
         return redirect('facturas')->with('success', 'Estado cambiado');
 
+    }
+    
+    public function getNextToken(Request $request){
+        $jsondata = array();
+        try {
+            $jsondata['token'] = ++Factura::where('tipo_documento', $request->tipo)->orderby('id_factura_token', 'desc')->latest()->get()[0]->id_factura_token;
+        } catch (\Throwable $th) {
+            $jsondata['token'] = 1;
+        }
+
+        echo json_encode($jsondata);
     }
 }

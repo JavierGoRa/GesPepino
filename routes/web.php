@@ -11,10 +11,16 @@
 |
 */
 
+/* Route::get('/e', function () {
+    return redirect('facturas');
+});
+ */
+
 Route::get('/', function () {
     return redirect('facturas');
 });
 
+Route::resource('ordenes', 'OrdenesController');
 Route::resource('facturas', 'FacturasController');
 Route::resource('trabajos', 'TrabajosController');
 
@@ -24,8 +30,13 @@ Route::get('presupuestos/ajax/get/trabajos', 'PresupuestosController@getTrabajos
 Route::get('presupuestos/pdf/{id}', 'PresupuestosController@generarPDF');
 Route::get('presupuestos/email/{id}', 'PresupuestosController@enviarFactura');
 
+Route::get('queryCliente', 'FacturasController@queryCliente');
+
 Route::get('facturas/ajax/get/trabajos', 'FacturasController@getTrabajos')->name('facturas.getTrabajos');
 Route::get('facturas/pdf/{id}', 'FacturasController@generarPDF');
 Route::get('facturas/email/{id}', 'FacturasController@enviarFactura');
 Route::get('facturas/cambiarestado/{id}', 'FacturasController@cambiarEstado');
 
+Route::get('ordenes/pdf/{id}', 'OrdenesController@generarPDF');
+
+Route::get('getTokenDocumento', 'FacturasController@getNextToken')->name('getTokenDocumento');
